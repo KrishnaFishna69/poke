@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Top 50 Price Changes</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <nav class="top-nav">
+    <a href="index.html">Back to Search</a>
+  </nav>
+
+  <div class="main-container" style="padding-top: 100px;">
+    <h1>Top 50 Price Changes</h1>
+    <table id="priceChangeTable">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Set</th>
+          <th>Old Price</th>
+          <th>New Price</th>
+          <th>Change ($)</th>
+          <th>Change (%)</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="price-changes.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PokeSearch</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+</head>
+<body>
+  <div class="background-container" id="background-container"></div>
+
+  <nav class="top-nav">
+    <a href="#">Competitive Viability</a>
+    <a href="price-changes.html">Price Changes</a>
+    <a href="#">Popular Cards</a>
+  </nav>
+
+  <div class="main-container">
+    <h1>Welcome to PokeSearch!</h1>
+    <div class="search-row-wrapper">
+      <div class="search-hint">Search for <strong>Name</strong>; <strong>Set</strong></div>
+      <div class="search-row">
+        <input type="text" id="searchInput" placeholder="Search for cards" autocomplete="off">
+      </div>
+      <div id="autocomplete-list"></div>
+    </div>
+    <div id="results"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

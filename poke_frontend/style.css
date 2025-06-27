@@ -1,0 +1,241 @@
+body {
+  margin: 0;
+  background-color: #001f3f;
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.top-nav {
+  background-color: #222;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.top-nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  transition: opacity 0.2s ease;
+}
+
+.top-nav a:hover {
+  opacity: 0.7;
+}
+
+.main-container {
+  text-align: center;
+  padding-top: 80px;
+}
+
+.card-details {
+  padding-top: 80px;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 30px;
+}
+
+.search-row-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-hint {
+  color: #cccccc;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.search-row {
+  display: flex;
+  justify-content: center;
+}
+
+input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  width: 250px;
+}
+
+#autocomplete-list {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: #0e2a4d;
+  border: 1px solid #444;
+  border-radius: 6px;
+  z-index: 1000;
+}
+
+#autocomplete-list:empty {
+  display: none;
+  border: none;
+}
+
+.autocomplete-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #222;
+  cursor: pointer;
+}
+
+.autocomplete-item:last-child {
+  border-bottom: none;
+}
+
+.autocomplete-item:hover {
+  background-color: #1b3a5d;
+}
+
+.autocomplete-item.active {
+  background-color: #29517c;
+}
+
+.autocomplete-item img {
+  width: 40px;
+  height: auto;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+.card-name {
+  flex: 1;
+  color: white;
+  text-align: left;
+}
+
+.card-set {
+  color: #ccc;
+  font-size: 0.9em;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.card-page {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px;
+  gap: 40px;
+  background-color: #001f3f;
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+  flex-wrap: wrap;
+}
+
+.card-page img {
+  width: 300px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.card-info {
+  max-width: 500px;
+}
+
+.card-info h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.card-info p {
+  font-size: 1.15em;
+  line-height: 1.6;
+  color: #dddddd;
+  margin: 10px 0;
+  word-wrap: break-word;
+}
+
+.back-button {
+  padding: 20px 40px;
+  background-color: #001f3f;
+}
+
+.back-button a {
+  color: #4eaaff;
+  font-size: 16px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.back-button a:hover {
+  text-decoration: underline;
+}
+
+.price-graph-section {
+  width: 100%;
+  max-width: 800px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+#priceChart {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+/* Optional: styling for change direction indicators */
+.change-positive {
+  color: #00ff88;
+  font-weight: bold;
+}
+
+.change-negative {
+  color: #ff4d4d;
+  font-weight: bold;
+}
+
+.background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.floating-card {
+  position: absolute;
+  width: 80px;
+  opacity: 0.06;
+  animation: floatDown linear infinite;
+}
+
+@keyframes floatDown {
+  0% {
+    transform: translateY(-150px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+/* Ensure content stays on top */
+body > *:not(.background-container) {
+  position: relative;
+  z-index: 1;
+}
+
