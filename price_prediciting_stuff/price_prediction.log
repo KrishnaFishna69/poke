@@ -1,0 +1,417 @@
+2025-06-17 19:11:06,492 - INFO - Starting price prediction pipeline...
+2025-06-17 19:11:06,779 - INFO - Loaded 19155 cards from art_scoring.csv
+2025-06-17 19:11:06,779 - INFO - Preparing data for XGBoost model...
+2025-06-17 19:11:06,779 - INFO - Starting feature preprocessing...
+2025-06-17 19:11:06,781 - INFO - Extracting set IDs...
+2025-06-17 19:11:06,807 - INFO - Extracting Standard legality...
+2025-06-17 19:11:06,821 - INFO - Processing subtypes...
+2025-06-17 19:11:06,825 - INFO - Processing types...
+2025-06-17 19:11:06,828 - INFO - Handling missing values...
+2025-06-17 19:11:06,835 - INFO - Filled 0 missing values in artist
+2025-06-17 19:11:06,837 - INFO - Filled 0 missing values in rarity
+2025-06-17 19:11:06,838 - INFO - Encoding categorical features...
+2025-06-17 19:11:06,852 - INFO - Encoded supertype with 3 unique values
+2025-06-17 19:11:06,855 - INFO - Encoded subtypes_str with 1 unique values
+2025-06-17 19:11:06,858 - INFO - Encoded types_str with 1 unique values
+2025-06-17 19:11:06,861 - INFO - Encoded set_id with 166 unique values
+2025-06-17 19:11:06,865 - INFO - Encoded artist with 347 unique values
+2025-06-17 19:11:06,868 - INFO - Encoded rarity with 36 unique values
+2025-06-17 19:11:06,870 - INFO - Encoded standard_legal with 2 unique values
+2025-06-17 19:11:06,881 - ERROR - Target column 'cardMarketPrice-06-17-25' not found in dataset
+2025-06-17 19:11:06,886 - ERROR - Failed to prepare data. Exiting.
+2025-06-17 19:26:56,428 - INFO - Starting price prediction pipeline...
+2025-06-17 19:26:56,656 - INFO - Loaded 19155 cards from pokemon_cards.csv
+2025-06-17 19:26:56,656 - INFO - Preparing data for XGBoost model...
+2025-06-17 19:26:56,656 - INFO - Starting feature preprocessing...
+2025-06-17 19:26:56,657 - INFO - Extracting set IDs...
+2025-06-17 19:26:56,675 - INFO - Extracting Standard legality...
+2025-06-17 19:26:56,688 - INFO - Processing subtypes...
+2025-06-17 19:26:56,692 - INFO - Processing types...
+2025-06-17 19:26:56,695 - INFO - Handling missing values...
+2025-06-17 19:26:56,701 - INFO - Filled 0 missing values in artist
+2025-06-17 19:26:56,703 - INFO - Filled 0 missing values in rarity
+2025-06-17 19:26:56,704 - INFO - Encoding categorical features...
+2025-06-17 19:26:56,714 - INFO - Encoded supertype with 3 unique values
+2025-06-17 19:26:56,716 - INFO - Encoded subtypes_str with 1 unique values
+2025-06-17 19:26:56,718 - INFO - Encoded types_str with 1 unique values
+2025-06-17 19:26:56,722 - INFO - Encoded set_id with 166 unique values
+2025-06-17 19:26:56,726 - INFO - Encoded artist with 347 unique values
+2025-06-17 19:26:56,728 - INFO - Encoded rarity with 36 unique values
+2025-06-17 19:26:56,731 - INFO - Encoded standard_legal with 2 unique values
+2025-06-17 19:26:56,734 - INFO - Final dataset: 18175 samples with 7 features
+2025-06-17 19:26:56,734 - INFO - Target variable range: 0.03 to 2499.99
+2025-06-17 19:26:56,737 - INFO - Training XGBoost model...
+2025-06-17 19:26:56,981 - INFO - Model Performance:
+2025-06-17 19:26:56,981 - INFO - Train MSE: 1265.65
+2025-06-17 19:26:56,981 - INFO - Test MSE: 3103.54
+2025-06-17 19:26:56,981 - INFO - Train MAE: 9.48
+2025-06-17 19:26:56,981 - INFO - Test MAE: 10.92
+2025-06-17 19:26:56,981 - INFO - Train R²: 0.6797
+2025-06-17 19:26:56,981 - INFO - Test R²: 0.4934
+2025-06-17 19:26:56,981 - INFO - Plotting feature importance...
+2025-06-17 19:33:29,664 - INFO - Model and encoders saved to price_prediction_model.pkl and price_prediction_encoders.pkl
+2025-06-17 19:33:29,665 - INFO - Feature importance plot saved to feature_importance.png
+2025-06-17 19:33:29,676 - INFO - Price prediction pipeline completed successfully!
+2025-06-17 19:36:16,657 - INFO - Starting price prediction pipeline...
+2025-06-17 19:36:16,890 - INFO - Loaded 19155 cards from pokemon_cards.csv
+2025-06-17 19:36:16,891 - INFO - Preparing data for XGBoost model...
+2025-06-17 19:36:16,891 - INFO - Starting feature preprocessing...
+2025-06-17 19:36:16,892 - INFO - Extracting set IDs...
+2025-06-17 19:36:16,909 - INFO - Extracting Standard legality...
+2025-06-17 19:36:16,923 - INFO - Processing subtypes...
+2025-06-17 19:36:16,926 - INFO - Processing types...
+2025-06-17 19:36:16,929 - INFO - Handling missing values...
+2025-06-17 19:36:16,934 - INFO - Filled 0 missing values in artist
+2025-06-17 19:36:16,937 - INFO - Filled 0 missing values in rarity
+2025-06-17 19:36:16,937 - INFO - Encoding categorical features...
+2025-06-17 19:36:16,948 - INFO - Encoded supertype with 3 unique values
+2025-06-17 19:36:16,951 - INFO - Encoded subtypes_str with 1 unique values
+2025-06-17 19:36:16,954 - INFO - Encoded types_str with 1 unique values
+2025-06-17 19:36:16,957 - INFO - Encoded set_id with 166 unique values
+2025-06-17 19:36:16,960 - INFO - Encoded artist with 347 unique values
+2025-06-17 19:36:16,963 - INFO - Encoded rarity with 36 unique values
+2025-06-17 19:36:16,965 - INFO - Encoded standard_legal with 2 unique values
+2025-06-17 19:36:16,969 - INFO - Final dataset: 18175 samples with 7 features
+2025-06-17 19:36:16,969 - INFO - Target variable range: 0.03 to 2499.99
+2025-06-17 19:36:16,971 - INFO - Training XGBoost model...
+2025-06-17 19:36:17,152 - INFO - Model Performance:
+2025-06-17 19:36:17,152 - INFO - Train MSE: 1265.65
+2025-06-17 19:36:17,152 - INFO - Test MSE: 3103.54
+2025-06-17 19:36:17,152 - INFO - Train MAE: 9.48
+2025-06-17 19:36:17,152 - INFO - Test MAE: 10.92
+2025-06-17 19:36:17,152 - INFO - Train R²: 0.6797
+2025-06-17 19:36:17,152 - INFO - Test R²: 0.4934
+2025-06-17 19:36:17,152 - INFO - Plotting feature importance...
+2025-06-17 19:36:40,710 - INFO - Exporting predictions CSV...
+2025-06-17 19:36:40,737 - INFO - Predictions exported to price_predictions.csv
+2025-06-17 19:36:40,737 - INFO - Top 10 cards with largest residuals:
+2025-06-17 19:36:40,738 - INFO - Visualizing decision tree structure...
+2025-06-17 19:36:40,760 - WARNING - Could not create decision tree visualization: You must install graphviz to plot tree
+2025-06-17 19:36:40,760 - INFO - This might be due to XGBoost version or system limitations
+2025-06-17 19:36:40,760 - INFO - Analyzing feature contributions...
+2025-06-17 19:38:58,449 - INFO - Starting price prediction pipeline...
+2025-06-17 19:38:58,678 - INFO - Loaded 19155 cards from pokemon_cards.csv
+2025-06-17 19:38:58,678 - INFO - Preparing data for XGBoost model...
+2025-06-17 19:38:58,678 - INFO - Starting feature preprocessing...
+2025-06-17 19:38:58,680 - INFO - Extracting set IDs...
+2025-06-17 19:38:58,697 - INFO - Extracting Standard legality...
+2025-06-17 19:38:58,710 - INFO - Processing subtypes...
+2025-06-17 19:38:58,713 - INFO - Processing types...
+2025-06-17 19:38:58,717 - INFO - Handling missing values...
+2025-06-17 19:38:58,722 - INFO - Filled 0 missing values in artist
+2025-06-17 19:38:58,724 - INFO - Filled 0 missing values in rarity
+2025-06-17 19:38:58,725 - INFO - Encoding categorical features...
+2025-06-17 19:38:58,735 - INFO - Encoded supertype with 3 unique values
+2025-06-17 19:38:58,737 - INFO - Encoded subtypes_str with 1 unique values
+2025-06-17 19:38:58,739 - INFO - Encoded types_str with 1 unique values
+2025-06-17 19:38:58,743 - INFO - Encoded set_id with 166 unique values
+2025-06-17 19:38:58,746 - INFO - Encoded artist with 347 unique values
+2025-06-17 19:38:58,748 - INFO - Encoded rarity with 36 unique values
+2025-06-17 19:38:58,751 - INFO - Encoded standard_legal with 2 unique values
+2025-06-17 19:38:58,754 - INFO - Final dataset: 18175 samples with 7 features
+2025-06-17 19:38:58,754 - INFO - Target variable range: 0.03 to 2499.99
+2025-06-17 19:38:58,757 - INFO - Training XGBoost model...
+2025-06-17 19:38:58,938 - INFO - Model Performance:
+2025-06-17 19:38:58,938 - INFO - Train MSE: 1265.65
+2025-06-17 19:38:58,938 - INFO - Test MSE: 3103.54
+2025-06-17 19:38:58,938 - INFO - Train MAE: 9.48
+2025-06-17 19:38:58,938 - INFO - Test MAE: 10.92
+2025-06-17 19:38:58,938 - INFO - Train R²: 0.6797
+2025-06-17 19:38:58,938 - INFO - Test R²: 0.4934
+2025-06-17 19:38:58,938 - INFO - Plotting feature importance...
+2025-06-17 19:39:09,524 - INFO - Exporting predictions CSV...
+2025-06-17 19:39:09,547 - INFO - Predictions exported to price_predictions.csv
+2025-06-17 19:39:09,547 - INFO - Top 10 cards with largest residuals:
+2025-06-17 19:39:09,548 - INFO - Visualizing decision tree structure...
+2025-06-17 19:39:09,569 - WARNING - Could not create decision tree visualization: You must install graphviz to plot tree
+2025-06-17 19:39:09,569 - INFO - This might be due to XGBoost version or system limitations
+2025-06-17 19:39:09,569 - INFO - Analyzing feature contributions...
+2025-06-17 19:39:09,569 - WARNING - Could not analyze feature contributions: XGBModel.predict() got an unexpected keyword argument 'pred_contribs'
+2025-06-17 19:39:09,569 - INFO - This might be due to XGBoost version differences
+2025-06-17 19:39:09,573 - INFO - Model and encoders saved to price_prediction_model.pkl and price_prediction_encoders.pkl
+2025-06-17 19:39:09,574 - INFO - Feature importance plot saved to feature_importance.png
+2025-06-17 19:39:09,574 - INFO - Decision tree visualizations saved
+2025-06-17 19:39:09,576 - INFO - Price prediction pipeline completed successfully!
+2025-06-17 19:39:59,564 - INFO - Starting price prediction pipeline...
+2025-06-17 19:39:59,798 - INFO - Loaded 19155 cards from pokemon_cards.csv
+2025-06-17 19:39:59,798 - INFO - Preparing data for XGBoost model...
+2025-06-17 19:39:59,799 - INFO - Starting feature preprocessing...
+2025-06-17 19:39:59,800 - INFO - Extracting set IDs...
+2025-06-17 19:39:59,817 - INFO - Extracting Standard legality...
+2025-06-17 19:39:59,831 - INFO - Processing subtypes...
+2025-06-17 19:39:59,834 - INFO - Processing types...
+2025-06-17 19:39:59,837 - INFO - Handling missing values...
+2025-06-17 19:39:59,842 - INFO - Filled 0 missing values in artist
+2025-06-17 19:39:59,844 - INFO - Filled 0 missing values in rarity
+2025-06-17 19:39:59,845 - INFO - Encoding categorical features...
+2025-06-17 19:39:59,855 - INFO - Encoded supertype with 3 unique values
+2025-06-17 19:39:59,857 - INFO - Encoded subtypes_str with 1 unique values
+2025-06-17 19:39:59,860 - INFO - Encoded types_str with 1 unique values
+2025-06-17 19:39:59,863 - INFO - Encoded set_id with 166 unique values
+2025-06-17 19:39:59,866 - INFO - Encoded artist with 347 unique values
+2025-06-17 19:39:59,869 - INFO - Encoded rarity with 36 unique values
+2025-06-17 19:39:59,871 - INFO - Encoded standard_legal with 2 unique values
+2025-06-17 19:39:59,875 - INFO - Final dataset: 18175 samples with 7 features
+2025-06-17 19:39:59,875 - INFO - Target variable range: 0.03 to 2499.99
+2025-06-17 19:39:59,878 - INFO - Training XGBoost model...
+2025-06-17 19:40:00,052 - INFO - Model Performance:
+2025-06-17 19:40:00,053 - INFO - Train MSE: 1265.65
+2025-06-17 19:40:00,053 - INFO - Test MSE: 3103.54
+2025-06-17 19:40:00,053 - INFO - Train MAE: 9.48
+2025-06-17 19:40:00,053 - INFO - Test MAE: 10.92
+2025-06-17 19:40:00,053 - INFO - Train R²: 0.6797
+2025-06-17 19:40:00,053 - INFO - Test R²: 0.4934
+2025-06-17 19:40:00,053 - INFO - Plotting feature importance...
+2025-06-17 19:40:06,228 - INFO - Exporting predictions CSV...
+2025-06-17 19:40:06,250 - INFO - Predictions exported to price_predictions.csv
+2025-06-17 19:40:06,250 - INFO - Top 10 cards with largest residuals:
+2025-06-17 19:40:06,251 - INFO - Visualizing decision tree structure...
+2025-06-17 19:40:06,298 - WARNING - Could not create decision tree visualization: [19:40:06] /Users/runner/work/xgboost/xgboost/src/tree/tree_model.cc:594: Failed to parse graphviz parameters:
+	{"graph_attrs": {"rankdir": "TB", "feature_names": ["supertype_encoded", "subtypes_str_encoded", "types_str_encoded", "set_id_encoded", "artist_encoded", "rarity_encoded", "standard_legal_encoded"], "max_depth": 4}}
+With error:
+[19:40:06] /Users/runner/work/xgboost/xgboost/dmlc-core/include/dmlc/json.h:677: Check failed: ch == '\"' (91 vs. ") : Error at Line 0, around ^`"supertype_encoded", "subtypes_str_encoded", "types_str_encoded`, Expect '"' but get '['
+Stack trace:
+  [bt] (0) 1   libxgboost.dylib                    0x000000016878d9e0 dmlc::LogMessageFatal::~LogMessageFatal() + 124
+  [bt] (1) 2   libxgboost.dylib                    0x0000000168a84dc0 dmlc::JSONReader::ReadString(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >*) + 504
+  [bt] (2) 3   libxgboost.dylib                    0x0000000168a85238 dmlc::json::MapHandler<std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > > >::Read(dmlc::JSONReader*, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >*) + 120
+  [bt] (3) 4   libxgboost.dylib                    0x0000000168a83d50 dmlc::json::MapHandler<std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > > > > > >::Read(dmlc::JSONReader*, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > > > > >*) + 148
+  [bt] (4) 5   libxgboost.dylib                    0x0000000168a7fa28 xgboost::GraphvizGenerator::GraphvizGenerator(xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, bool) + 408
+  [bt] (5) 6   libxgboost.dylib                    0x0000000168a7f7b8 std::__1::__function::__func<xgboost::$_3, std::__1::allocator<xgboost::$_3>, xgboost::TreeGenerator* (xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)>::operator()(xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >&&, bool&&) + 84
+  [bt] (6) 7   libxgboost.dylib                    0x0000000168a77ca8 xgboost::TreeGenerator::Create(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, xgboost::FeatureMap const&, bool) + 528
+  [bt] (7) 8   libxgboost.dylib                    0x0000000168a87c84 xgboost::RegTree::DumpModel(xgboost::FeatureMap const&, bool, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const + 872
+  [bt] (8) 9   libxgboost.dylib                    0x0000000168985ea8 void dmlc::OMPException::Run<xgboost::gbm::GBTreeModel::DumpModel(xgboost::FeatureMap const&, bool, int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const::'lambda'(unsigned long), unsigned long>(xgboost::gbm::GBTreeModel::DumpModel(xgboost::FeatureMap const&, bool, int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const::'lambda'(unsigned long), unsigned long) + 196
+
+
+Stack trace:
+  [bt] (0) 1   libxgboost.dylib                    0x000000016878d9e0 dmlc::LogMessageFatal::~LogMessageFatal() + 124
+  [bt] (1) 2   libxgboost.dylib                    0x0000000168a81204 xgboost::GraphvizGenerator::GraphvizGenerator(xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, bool) + 6516
+  [bt] (2) 3   libxgboost.dylib                    0x0000000168a7f7b8 std::__1::__function::__func<xgboost::$_3, std::__1::allocator<xgboost::$_3>, xgboost::TreeGenerator* (xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)>::operator()(xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >&&, bool&&) + 84
+  [bt] (3) 4   libxgboost.dylib                    0x0000000168a77ca8 xgboost::TreeGenerator::Create(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, xgboost::FeatureMap const&, bool) + 528
+  [bt] (4) 5   libxgboost.dylib                    0x0000000168a87c84 xgboost::RegTree::DumpModel(xgboost::FeatureMap const&, bool, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const + 872
+  [bt] (5) 6   libxgboost.dylib                    0x0000000168985ea8 void dmlc::OMPException::Run<xgboost::gbm::GBTreeModel::DumpModel(xgboost::FeatureMap const&, bool, int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const::'lambda'(unsigned long), unsigned long>(xgboost::gbm::GBTreeModel::DumpModel(xgboost::FeatureMap const&, bool, int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const::'lambda'(unsigned long), unsigned long) + 196
+  [bt] (6) 7   libxgboost.dylib                    0x0000000168986294 .omp_outlined..259 + 164
+  [bt] (7) 8   libomp.dylib                        0x0000000168221c1c __kmp_invoke_microtask + 156
+  [bt] (8) 9   ???                                 0x0000000000000004 0x0 + 4
+
+
+2025-06-17 19:40:06,298 - INFO - This might be due to XGBoost version or system limitations
+2025-06-17 19:40:06,298 - INFO - Analyzing feature contributions...
+2025-06-17 19:40:06,298 - WARNING - Could not analyze feature contributions: XGBModel.predict() got an unexpected keyword argument 'pred_contribs'
+2025-06-17 19:40:06,298 - INFO - This might be due to XGBoost version differences
+2025-06-17 19:40:06,301 - INFO - Model and encoders saved to price_prediction_model.pkl and price_prediction_encoders.pkl
+2025-06-17 19:40:06,302 - INFO - Feature importance plot saved to feature_importance.png
+2025-06-17 19:40:06,302 - INFO - Decision tree visualizations saved
+2025-06-17 19:40:06,304 - INFO - Price prediction pipeline completed successfully!
+2025-06-19 14:12:45,696 - INFO - Starting price prediction pipeline...
+2025-06-19 14:12:45,699 - ERROR - pokemon_cards.csv not found. Please ensure the file exists.
+2025-06-19 14:13:54,994 - INFO - Starting price prediction pipeline...
+2025-06-19 14:13:55,225 - INFO - Loade 18174 cards from pokemon_cards.csv
+2025-06-19 14:13:55,225 - INFO - Preparing data for XGBoost model...
+2025-06-19 14:13:55,225 - INFO - Starting feature preprocessing...
+2025-06-19 14:13:55,227 - INFO - Extracting set IDs...
+2025-06-19 14:13:55,244 - INFO - Extracting Standard legality...
+2025-06-19 14:13:55,257 - INFO - Processing subtypes...
+2025-06-19 14:13:55,261 - INFO - Processing types...
+2025-06-19 14:13:55,264 - INFO - Handling missing values...
+2025-06-19 14:13:55,269 - INFO - Filled 0 missing values in artist
+2025-06-19 14:13:55,271 - INFO - Filled 0 missing values in rarity
+2025-06-19 14:13:55,272 - INFO - Encoding categorical features...
+2025-06-19 14:13:55,282 - INFO - Encoded supertype with 3 unique values
+2025-06-19 14:13:55,284 - INFO - Encoded subtypes_str with 1 unique values
+2025-06-19 14:13:55,286 - INFO - Encoded types_str with 1 unique values
+2025-06-19 14:13:55,290 - INFO - Encoded set_id with 156 unique values
+2025-06-19 14:13:55,293 - INFO - Encoded artist with 339 unique values
+2025-06-19 14:13:55,295 - INFO - Encoded rarity with 36 unique values
+2025-06-19 14:13:55,298 - INFO - Encoded standard_legal with 2 unique values
+2025-06-19 14:13:55,300 - INFO - Final dataset: 18174 samples with 7 features
+2025-06-19 14:13:55,300 - INFO - Target variable range: 0.04 to 2499.99
+2025-06-19 14:13:55,303 - INFO - Training XGBoost model...
+2025-06-19 14:13:55,487 - INFO - Model Performance:
+2025-06-19 14:13:55,487 - INFO - Train MSE: 1252.08
+2025-06-19 14:13:55,487 - INFO - Test MSE: 2728.10
+2025-06-19 14:13:55,487 - INFO - Train MAE: 9.31
+2025-06-19 14:13:55,487 - INFO - Test MAE: 11.46
+2025-06-19 14:13:55,487 - INFO - Train R²: 0.6981
+2025-06-19 14:13:55,487 - INFO - Test R²: 0.4917
+2025-06-19 14:13:55,487 - INFO - Plotting feature importance...
+2025-06-19 14:14:07,135 - INFO - Exporting predictions CSV...
+2025-06-19 14:14:07,161 - INFO - Predictions exported to price_predictions.csv
+2025-06-19 14:14:07,161 - INFO - Top 10 cards with largest residuals:
+2025-06-19 14:14:07,162 - INFO - Visualizing decision tree structure...
+2025-06-19 14:14:07,223 - WARNING - Could not create decision tree visualization: [14:14:07] /Users/runner/work/xgboost/xgboost/src/tree/tree_model.cc:594: Failed to parse graphviz parameters:
+	{"graph_attrs": {"rankdir": "TB", "feature_names": ["supertype_encoded", "subtypes_str_encoded", "types_str_encoded", "set_id_encoded", "artist_encoded", "rarity_encoded", "standard_legal_encoded"], "max_depth": 4}}
+With error:
+[14:14:07] /Users/runner/work/xgboost/xgboost/dmlc-core/include/dmlc/json.h:677: Check failed: ch == '\"' (91 vs. ") : Error at Line 0, around ^`"supertype_encoded", "subtypes_str_encoded", "types_str_encoded`, Expect '"' but get '['
+Stack trace:
+  [bt] (0) 1   libxgboost.dylib                    0x000000016ef759e0 dmlc::LogMessageFatal::~LogMessageFatal() + 124
+  [bt] (1) 2   libxgboost.dylib                    0x000000016f26cdc0 dmlc::JSONReader::ReadString(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >*) + 504
+  [bt] (2) 3   libxgboost.dylib                    0x000000016f26d238 dmlc::json::MapHandler<std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > > >::Read(dmlc::JSONReader*, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >*) + 120
+  [bt] (3) 4   libxgboost.dylib                    0x000000016f26bd50 dmlc::json::MapHandler<std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > > > > > >::Read(dmlc::JSONReader*, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > > > > >*) + 148
+  [bt] (4) 5   libxgboost.dylib                    0x000000016f267a28 xgboost::GraphvizGenerator::GraphvizGenerator(xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, bool) + 408
+  [bt] (5) 6   libxgboost.dylib                    0x000000016f2677b8 std::__1::__function::__func<xgboost::$_3, std::__1::allocator<xgboost::$_3>, xgboost::TreeGenerator* (xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)>::operator()(xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >&&, bool&&) + 84
+  [bt] (6) 7   libxgboost.dylib                    0x000000016f25fca8 xgboost::TreeGenerator::Create(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, xgboost::FeatureMap const&, bool) + 528
+  [bt] (7) 8   libxgboost.dylib                    0x000000016f26fc84 xgboost::RegTree::DumpModel(xgboost::FeatureMap const&, bool, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const + 872
+  [bt] (8) 9   libxgboost.dylib                    0x000000016f16dea8 void dmlc::OMPException::Run<xgboost::gbm::GBTreeModel::DumpModel(xgboost::FeatureMap const&, bool, int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const::'lambda'(unsigned long), unsigned long>(xgboost::gbm::GBTreeModel::DumpModel(xgboost::FeatureMap const&, bool, int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const::'lambda'(unsigned long), unsigned long) + 196
+
+
+Stack trace:
+  [bt] (0) 1   libxgboost.dylib                    0x000000016ef759e0 dmlc::LogMessageFatal::~LogMessageFatal() + 124
+  [bt] (1) 2   libxgboost.dylib                    0x000000016f269204 xgboost::GraphvizGenerator::GraphvizGenerator(xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, bool) + 6516
+  [bt] (2) 3   libxgboost.dylib                    0x000000016f2677b8 std::__1::__function::__func<xgboost::$_3, std::__1::allocator<xgboost::$_3>, xgboost::TreeGenerator* (xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)>::operator()(xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >&&, bool&&) + 84
+  [bt] (3) 4   libxgboost.dylib                    0x000000016f25fca8 xgboost::TreeGenerator::Create(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, xgboost::FeatureMap const&, bool) + 528
+  [bt] (4) 5   libxgboost.dylib                    0x000000016f26fc84 xgboost::RegTree::DumpModel(xgboost::FeatureMap const&, bool, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const + 872
+  [bt] (5) 6   libxgboost.dylib                    0x000000016f16dea8 void dmlc::OMPException::Run<xgboost::gbm::GBTreeModel::DumpModel(xgboost::FeatureMap const&, bool, int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const::'lambda'(unsigned long), unsigned long>(xgboost::gbm::GBTreeModel::DumpModel(xgboost::FeatureMap const&, bool, int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const::'lambda'(unsigned long), unsigned long) + 196
+  [bt] (6) 7   libxgboost.dylib                    0x000000016f16e294 .omp_outlined..259 + 164
+  [bt] (7) 8   libomp.dylib                        0x000000016ea09c1c __kmp_invoke_microtask + 156
+
+
+2025-06-19 14:14:07,223 - INFO - This might be due to XGBoost version or system limitations
+2025-06-19 14:14:07,223 - INFO - Analyzing feature contributions...
+2025-06-19 14:14:07,224 - WARNING - Could not analyze feature contributions: XGBModel.predict() got an unexpected keyword argument 'pred_contribs'
+2025-06-19 14:14:07,224 - INFO - This might be due to XGBoost version differences
+2025-06-19 14:14:07,229 - INFO - Model and encoders saved to price_prediction_model.pkl and price_prediction_encoders.pkl
+2025-06-19 14:14:07,229 - INFO - Feature importance plot saved to feature_importance.png
+2025-06-19 14:14:07,229 - INFO - Decision tree visualizations saved
+2025-06-19 14:14:07,233 - INFO - Price prediction pipeline completed successfully!
+2025-06-19 14:15:35,310 - INFO - Starting price prediction pipeline...
+2025-06-19 14:15:35,543 - INFO - Loade 18174 cards from pokemon_cards.csv
+2025-06-19 14:15:35,543 - INFO - Preparing data for XGBoost model...
+2025-06-19 14:15:35,544 - INFO - Starting feature preprocessing...
+2025-06-19 14:15:35,546 - INFO - Extracting set IDs...
+2025-06-19 14:15:35,561 - INFO - Extracting Standard legality...
+2025-06-19 14:15:35,574 - INFO - Processing subtypes...
+2025-06-19 14:15:35,577 - INFO - Processing types...
+2025-06-19 14:15:35,580 - INFO - Handling missing values...
+2025-06-19 14:15:35,585 - INFO - Filled 0 missing values in artist
+2025-06-19 14:15:35,587 - INFO - Filled 0 missing values in rarity
+2025-06-19 14:15:35,588 - INFO - Encoding categorical features...
+2025-06-19 14:15:35,598 - INFO - Encoded supertype with 3 unique values
+2025-06-19 14:15:35,600 - INFO - Encoded subtypes_str with 1 unique values
+2025-06-19 14:15:35,603 - INFO - Encoded types_str with 1 unique values
+2025-06-19 14:15:35,606 - INFO - Encoded set_id with 156 unique values
+2025-06-19 14:15:35,609 - INFO - Encoded artist with 339 unique values
+2025-06-19 14:15:35,612 - INFO - Encoded rarity with 36 unique values
+2025-06-19 14:15:35,614 - INFO - Encoded standard_legal with 2 unique values
+2025-06-19 14:15:35,620 - INFO - Encoded popularity_votes with 144 unique values
+2025-06-19 14:15:35,629 - INFO - Encoded avg_votes with 164 unique values
+2025-06-19 14:15:35,632 - INFO - Final dataset: 18174 samples with 9 features
+2025-06-19 14:15:35,632 - INFO - Target variable range: 0.04 to 2499.99
+2025-06-19 14:15:35,635 - INFO - Training XGBoost model...
+2025-06-19 14:15:35,814 - INFO - Model Performance:
+2025-06-19 14:15:35,814 - INFO - Train MSE: 729.71
+2025-06-19 14:15:35,814 - INFO - Test MSE: 3000.67
+2025-06-19 14:15:35,814 - INFO - Train MAE: 8.36
+2025-06-19 14:15:35,814 - INFO - Test MAE: 11.43
+2025-06-19 14:15:35,814 - INFO - Train R²: 0.8240
+2025-06-19 14:15:35,814 - INFO - Test R²: 0.4409
+2025-06-19 14:15:35,814 - INFO - Plotting feature importance...
+2025-06-19 14:15:48,093 - INFO - Exporting predictions CSV...
+2025-06-19 14:15:48,125 - INFO - Predictions exported to price_predictions.csv
+2025-06-19 14:15:48,126 - INFO - Top 10 cards with largest residuals:
+2025-06-19 14:15:48,126 - INFO - Visualizing decision tree structure...
+2025-06-19 14:15:48,186 - WARNING - Could not create decision tree visualization: [14:15:48] /Users/runner/work/xgboost/xgboost/src/tree/tree_model.cc:594: Failed to parse graphviz parameters:
+	{"graph_attrs": {"rankdir": "TB", "feature_names": ["supertype_encoded", "subtypes_str_encoded", "types_str_encoded", "set_id_encoded", "artist_encoded", "rarity_encoded", "standard_legal_encoded", "popularity_votes_encoded", "avg_votes_encoded"], "max_depth": 4}}
+With error:
+[14:15:48] /Users/runner/work/xgboost/xgboost/dmlc-core/include/dmlc/json.h:677: Check failed: ch == '\"' (91 vs. ") : Error at Line 0, around ^`"supertype_encoded", "subtypes_str_encoded", "types_str_encoded`, Expect '"' but get '['
+Stack trace:
+  [bt] (0) 1   libxgboost.dylib                    0x000000014f2f59e0 dmlc::LogMessageFatal::~LogMessageFatal() + 124
+  [bt] (1) 2   libxgboost.dylib                    0x000000014f5ecdc0 dmlc::JSONReader::ReadString(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >*) + 504
+  [bt] (2) 3   libxgboost.dylib                    0x000000014f5ed238 dmlc::json::MapHandler<std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > > >::Read(dmlc::JSONReader*, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >*) + 120
+  [bt] (3) 4   libxgboost.dylib                    0x000000014f5ebd50 dmlc::json::MapHandler<std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > > > > > >::Read(dmlc::JSONReader*, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > > > > >*) + 148
+  [bt] (4) 5   libxgboost.dylib                    0x000000014f5e7a28 xgboost::GraphvizGenerator::GraphvizGenerator(xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, bool) + 408
+  [bt] (5) 6   libxgboost.dylib                    0x000000014f5e77b8 std::__1::__function::__func<xgboost::$_3, std::__1::allocator<xgboost::$_3>, xgboost::TreeGenerator* (xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)>::operator()(xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >&&, bool&&) + 84
+  [bt] (6) 7   libxgboost.dylib                    0x000000014f5dfca8 xgboost::TreeGenerator::Create(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, xgboost::FeatureMap const&, bool) + 528
+  [bt] (7) 8   libxgboost.dylib                    0x000000014f5efc84 xgboost::RegTree::DumpModel(xgboost::FeatureMap const&, bool, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const + 872
+  [bt] (8) 9   libxgboost.dylib                    0x000000014f4edea8 void dmlc::OMPException::Run<xgboost::gbm::GBTreeModel::DumpModel(xgboost::FeatureMap const&, bool, int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const::'lambda'(unsigned long), unsigned long>(xgboost::gbm::GBTreeModel::DumpModel(xgboost::FeatureMap const&, bool, int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const::'lambda'(unsigned long), unsigned long) + 196
+
+
+Stack trace:
+  [bt] (0) 1   libxgboost.dylib                    0x000000014f2f59e0 dmlc::LogMessageFatal::~LogMessageFatal() + 124
+  [bt] (1) 2   libxgboost.dylib                    0x000000014f5e9204 xgboost::GraphvizGenerator::GraphvizGenerator(xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, bool) + 6516
+  [bt] (2) 3   libxgboost.dylib                    0x000000014f5e77b8 std::__1::__function::__func<xgboost::$_3, std::__1::allocator<xgboost::$_3>, xgboost::TreeGenerator* (xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)>::operator()(xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >&&, bool&&) + 84
+  [bt] (3) 4   libxgboost.dylib                    0x000000014f5dfca8 xgboost::TreeGenerator::Create(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, xgboost::FeatureMap const&, bool) + 528
+  [bt] (4) 5   libxgboost.dylib                    0x000000014f5efc84 xgboost::RegTree::DumpModel(xgboost::FeatureMap const&, bool, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const + 872
+  [bt] (5) 6   libxgboost.dylib                    0x000000014f4edea8 void dmlc::OMPException::Run<xgboost::gbm::GBTreeModel::DumpModel(xgboost::FeatureMap const&, bool, int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const::'lambda'(unsigned long), unsigned long>(xgboost::gbm::GBTreeModel::DumpModel(xgboost::FeatureMap const&, bool, int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const::'lambda'(unsigned long), unsigned long) + 196
+  [bt] (6) 7   libxgboost.dylib                    0x000000014f4ee294 .omp_outlined..259 + 164
+  [bt] (7) 8   libomp.dylib                        0x000000014ed89c1c __kmp_invoke_microtask + 156
+
+
+2025-06-19 14:15:48,186 - INFO - This might be due to XGBoost version or system limitations
+2025-06-19 14:15:48,186 - INFO - Analyzing feature contributions...
+2025-06-19 14:15:48,186 - WARNING - Could not analyze feature contributions: XGBModel.predict() got an unexpected keyword argument 'pred_contribs'
+2025-06-19 14:15:48,186 - INFO - This might be due to XGBoost version differences
+2025-06-19 14:15:48,191 - INFO - Model and encoders saved to price_prediction_model.pkl and price_prediction_encoders.pkl
+2025-06-19 14:15:48,191 - INFO - Feature importance plot saved to feature_importance.png
+2025-06-19 14:15:48,191 - INFO - Decision tree visualizations saved
+2025-06-19 14:15:48,195 - INFO - Price prediction pipeline completed successfully!
+2025-06-19 14:19:08,970 - INFO - Starting price prediction pipeline...
+2025-06-19 14:19:09,205 - INFO - Loade 18174 cards from pokemon_cards.csv
+2025-06-19 14:19:09,205 - INFO - Preparing data for XGBoost model...
+2025-06-19 14:19:09,205 - INFO - Starting feature preprocessing...
+2025-06-19 14:19:09,207 - INFO - Extracting set IDs...
+2025-06-19 14:19:09,223 - INFO - Extracting Standard legality...
+2025-06-19 14:19:09,236 - INFO - Processing subtypes...
+2025-06-19 14:19:09,239 - INFO - Processing types...
+2025-06-19 14:19:09,242 - INFO - Handling missing values...
+2025-06-19 14:19:09,247 - INFO - Filled 0 missing values in artist
+2025-06-19 14:19:09,249 - INFO - Filled 0 missing values in rarity
+2025-06-19 14:19:09,249 - INFO - Encoding categorical features...
+2025-06-19 14:19:09,260 - INFO - Encoded supertype with 3 unique values
+2025-06-19 14:19:09,262 - INFO - Encoded subtypes_str with 1 unique values
+2025-06-19 14:19:09,264 - INFO - Encoded types_str with 1 unique values
+2025-06-19 14:19:09,268 - INFO - Encoded set_id with 156 unique values
+2025-06-19 14:19:09,272 - INFO - Encoded artist with 339 unique values
+2025-06-19 14:19:09,274 - INFO - Encoded rarity with 36 unique values
+2025-06-19 14:19:09,277 - INFO - Encoded standard_legal with 2 unique values
+2025-06-19 14:19:09,283 - INFO - Encoded popularity_votes with 144 unique values
+2025-06-19 14:19:09,292 - INFO - Encoded avg_votes with 164 unique values
+2025-06-19 14:19:09,294 - INFO - Final dataset: 18174 samples with 9 features
+2025-06-19 14:19:09,295 - INFO - Target variable range: 0.04 to 2499.99
+2025-06-19 14:19:09,297 - INFO - Training XGBoost model...
+2025-06-19 14:19:09,475 - INFO - Model Performance:
+2025-06-19 14:19:09,475 - INFO - Train MSE: 729.71
+2025-06-19 14:19:09,475 - INFO - Test MSE: 3000.67
+2025-06-19 14:19:09,475 - INFO - Train MAE: 8.36
+2025-06-19 14:19:09,475 - INFO - Test MAE: 11.43
+2025-06-19 14:19:09,475 - INFO - Train R²: 0.8240
+2025-06-19 14:19:09,475 - INFO - Test R²: 0.4409
+2025-06-19 14:19:09,475 - INFO - Plotting feature importance...
+2025-06-19 14:19:20,673 - INFO - Exporting predictions CSV...
+2025-06-19 14:19:20,701 - INFO - Predictions exported to price_predictions.csv
+2025-06-19 14:19:20,701 - INFO - Top 10 cards with largest residuals:
+2025-06-19 14:19:20,702 - INFO - Visualizing decision tree structure...
+2025-06-19 14:19:20,753 - WARNING - Could not create decision tree visualization: [14:19:20] /Users/runner/work/xgboost/xgboost/src/tree/tree_model.cc:594: Failed to parse graphviz parameters:
+	{"graph_attrs": {"rankdir": "TB", "feature_names": ["supertype_encoded", "subtypes_str_encoded", "types_str_encoded", "set_id_encoded", "artist_encoded", "rarity_encoded", "standard_legal_encoded", "popularity_votes_encoded", "avg_votes_encoded"], "max_depth": 4}}
+With error:
+[14:19:20] /Users/runner/work/xgboost/xgboost/dmlc-core/include/dmlc/json.h:677: Check failed: ch == '\"' (91 vs. ") : Error at Line 0, around ^`"supertype_encoded", "subtypes_str_encoded", "types_str_encoded`, Expect '"' but get '['
+Stack trace:
+  [bt] (0) 1   libxgboost.dylib                    0x000000015068d9e0 dmlc::LogMessageFatal::~LogMessageFatal() + 124
+  [bt] (1) 2   libxgboost.dylib                    0x0000000150984dc0 dmlc::JSONReader::ReadString(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >*) + 504
+  [bt] (2) 3   libxgboost.dylib                    0x0000000150985238 dmlc::json::MapHandler<std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > > >::Read(dmlc::JSONReader*, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >*) + 120
+  [bt] (3) 4   libxgboost.dylib                    0x0000000150983d50 dmlc::json::MapHandler<std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > > > > > >::Read(dmlc::JSONReader*, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::map<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::allocator<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > > > > >*) + 148
+  [bt] (4) 5   libxgboost.dylib                    0x000000015097fa28 xgboost::GraphvizGenerator::GraphvizGenerator(xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, bool) + 408
+  [bt] (5) 6   libxgboost.dylib                    0x000000015097f7b8 std::__1::__function::__func<xgboost::$_3, std::__1::allocator<xgboost::$_3>, xgboost::TreeGenerator* (xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)>::operator()(xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >&&, bool&&) + 84
+  [bt] (6) 7   libxgboost.dylib                    0x0000000150977ca8 xgboost::TreeGenerator::Create(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, xgboost::FeatureMap const&, bool) + 528
+  [bt] (7) 8   libxgboost.dylib                    0x0000000150987c84 xgboost::RegTree::DumpModel(xgboost::FeatureMap const&, bool, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const + 872
+  [bt] (8) 9   libxgboost.dylib                    0x0000000150885ea8 void dmlc::OMPException::Run<xgboost::gbm::GBTreeModel::DumpModel(xgboost::FeatureMap const&, bool, int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const::'lambda'(unsigned long), unsigned long>(xgboost::gbm::GBTreeModel::DumpModel(xgboost::FeatureMap const&, bool, int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const::'lambda'(unsigned long), unsigned long) + 196
+
+
+Stack trace:
+  [bt] (0) 1   libxgboost.dylib                    0x000000015068d9e0 dmlc::LogMessageFatal::~LogMessageFatal() + 124
+  [bt] (1) 2   libxgboost.dylib                    0x0000000150981204 xgboost::GraphvizGenerator::GraphvizGenerator(xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, bool) + 6516
+  [bt] (2) 3   libxgboost.dylib                    0x000000015097f7b8 std::__1::__function::__func<xgboost::$_3, std::__1::allocator<xgboost::$_3>, xgboost::TreeGenerator* (xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, bool)>::operator()(xgboost::FeatureMap const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >&&, bool&&) + 84
+  [bt] (3) 4   libxgboost.dylib                    0x0000000150977ca8 xgboost::TreeGenerator::Create(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, xgboost::FeatureMap const&, bool) + 528
+  [bt] (4) 5   libxgboost.dylib                    0x0000000150987c84 xgboost::RegTree::DumpModel(xgboost::FeatureMap const&, bool, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const + 872
+  [bt] (5) 6   libxgboost.dylib                    0x0000000150885ea8 void dmlc::OMPException::Run<xgboost::gbm::GBTreeModel::DumpModel(xgboost::FeatureMap const&, bool, int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const::'lambda'(unsigned long), unsigned long>(xgboost::gbm::GBTreeModel::DumpModel(xgboost::FeatureMap const&, bool, int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const::'lambda'(unsigned long), unsigned long) + 196
+  [bt] (6) 7   libxgboost.dylib                    0x0000000150886294 .omp_outlined..259 + 164
+  [bt] (7) 8   libomp.dylib                        0x0000000147bc9c1c __kmp_invoke_microtask + 156
+
+
+2025-06-19 14:19:20,754 - INFO - This might be due to XGBoost version or system limitations
+2025-06-19 14:19:20,754 - INFO - Analyzing feature contributions...
+2025-06-19 14:19:20,756 - WARNING - Could not analyze feature contributions: XGBModel.predict() got an unexpected keyword argument 'pred_contribs'
+2025-06-19 14:19:20,756 - INFO - This might be due to XGBoost version differences
+2025-06-19 14:19:20,769 - INFO - Model and encoders saved to price_prediction_model.pkl and price_prediction_encoders.pkl
+2025-06-19 14:19:20,769 - INFO - Feature importance plot saved to feature_importance.png
+2025-06-19 14:19:20,769 - INFO - Decision tree visualizations saved
+2025-06-19 14:19:20,776 - INFO - Price prediction pipeline completed successfully!
