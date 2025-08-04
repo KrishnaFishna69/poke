@@ -1,0 +1,67 @@
+name: Daily Pokemon Card Price Update
+
+on:
+  schedule:
+    # Run daily at 12:30 AM UTC
+    - cron: '30 0 * * *'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  update-prices:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Download database from artifacts (if exists)
+      uses: actions/download-artifact@v4
+      with:
+        name: pokemon-cards-database
+        path: poke_backend/
+      continue-on-error: true  # Continue if no previous artifacts exist
+      
+    - name: Run price update
+      working-directory: ./poke_backend
+      run: |
+        python pokeExp_github_robust.py
+        
+    - name: Upload updated database as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: pokemon-cards-database
+        path: poke_backend/pokemon_cards.db
+        retention-days: 30
+        
+    - name: Upload logs as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: price-update-logs
+        path: poke_backend/logs/
+        retention-days: 30
+        
+    - name: Commit and push database changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add poke_backend/pokemon_cards.db
+        git commit -m "Update Pokemon card prices - $(date +'%Y-%m-%d')" || echo "No changes to commit"
+        git push
+        
+    - name: Create summary
+      run: |
+        echo "## Daily Price Update Summary" >> $GITHUB_STEP_SUMMARY
+        echo "- **Date:** $(date)" >> $GITHUB_STEP_SUMMARY
+        echo "- **Status:** ✅ Completed" >> $GITHUB_STEP_SUMMARY
+        echo "- **Database:** Updated and committed" >> $GITHUB_STEP_SUMMARY
+        echo "- **Next run:** Tomorrow at 12:30 AM UTC" >> $GITHUB_STEP_SUMMARY 
