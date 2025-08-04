@@ -8,10 +8,11 @@ from pokemontcgsdk import RestClient
 import pandas as pd
 import time
 from datetime import datetime
+import random
 
-
+print("mmm\n")
 # Configure the API client
-RestClient.configure("98c0dc2b-311b-483e-9e86-f9ec67bbbdf0")
+RestClient.configure("85774024-7eef-4bc8-a628-3e3db902762e")
 print("API client configured")
 # Get today's date in the format MM-DD-YY
 today = datetime.now().strftime("%m-%d-%y")
@@ -54,7 +55,7 @@ def get_market_price(prices):
 try:
     # Try to load existing CSV file
     try:
-        df = pd.read_csv("pokemon_cards.csv")
+        df = pd.read_csv("pokemon_cards_clean.csv")
         print(f"Loaded existing CSV file with {len(df)} cards")
     except FileNotFoundError:
         # If file doesn't exist, create new DataFrame with all columns
@@ -71,82 +72,70 @@ try:
 
     # Get all cards
     print("\nFetching all cards...")
-    cards = Card.all()
     cards_processed = 0
-    
-    for card in cards:
+    print("Starting pagination loop...")  # Debug print
+    page = 1
+    page_size = 250  # Adjust as needed, API max is usually 250
+    while True:
+        print(f"Fetching page {page}...")  # Debug print
+        # Add a small delay to avoid rate limiting
+        time.sleep(random.uniform(0.5, 1.5))
+        
+        # Try to fetch cards for this page
         try:
-            new_row = {}
-            
-            #Basic attributes that should always exist
-            new_row["name"] = safe_get("name")
-            new_row["id"] = safe_get("id")
-            new_row["supertype"] = safe_get("supertype")
-            
-            #Complex attributes that might not exist
-            new_row["subtypes"] = safe_get("subtypes")
-            new_row["hp"] = safe_get("hp")
-            new_row["types"] = safe_get("types")
-            new_row["evolvesFrom"] = safe_get("evolvesFrom")
-            new_row["evolvesTo"] = safe_get("evolvesTo")
-            new_row["rules"] = safe_get("rules")
-            new_row["abilities"] = safe_get("abilities")
-            new_row["attacks"] = safe_get("attacks")
-            new_row["weaknesses"] = safe_get("weaknesses")
-            new_row["resistances"] = safe_get("resistances")
-            new_row["retreatCost"] = safe_get("retreatCost")
-            new_row["convertedRetreatCost"] = safe_get("convertedRetreatCost")
-            new_row["set"] = safe_get("set")
-            new_row["number"] = safe_get("number")
-            new_row["artist"] = safe_get("artist")
-            new_row["rarity"] = safe_get("rarity")
-            new_row["flavorText"] = safe_get("flavorText")
-            new_row["nationalPokedexNumber"] = safe_get("nationalPokedexNumber")
-            new_row["legalities"] = safe_get("legalities")
-            
-            # Nested attributes that need special handling
+            cards = Card.where(page=page, pageSize=page_size)
+        except Exception as api_error:
+            print(f"API error on page {page}:")
             try:
-                new_row["images"] = safe_str(card.images.large) if hasattr(card, 'images') else None
-            except (AttributeError, TypeError):
-                new_row["images"] = None
-                
-            try:
-                market_price = get_market_price(card.tcgplayer.prices) if hasattr(card, 'tcgplayer') else None
-                new_row[price_column] = market_price
-                print(f"Card: {safe_str(card.name)}, Price: {market_price}")
-            except (AttributeError, TypeError):
-                new_row[price_column] = None
-            
-            # Only add cards that have pricing data
-            if new_row[price_column] is not None:
-                # Check if card already exists in DataFrame
-                existing_card = df[df['id'] == new_row['id']]
-                if not existing_card.empty:
-                    # Update the price for existing card
-                    df.loc[existing_card.index, price_column] = new_row[price_column]
-                else:
-                    # Add new card only if it has pricing data
-                    df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
-                
-                cards_processed += 1
-                
-                # Save every 100 cards in case of interruption
-                if cards_processed % 100 == 0:
-                    df.to_csv("pokemon_cards.csv", index=False)
-                    print(f"Saved {cards_processed} cards with pricing data so far...")
-            else:
-                print(f"Skipping {safe_str(card.name)} - no pricing data available")
-            
-        except Exception as e:
-            print(f"Error processing card: {str(e)}")
+                error_msg = api_error.decode('utf-8') if isinstance(api_error, bytes) else str(api_error)
+                print(error_msg)
+            except:
+                print("Unknown API error occurred")
+            print("Retrying in 5 seconds...")
+            time.sleep(5)
             continue
-
+        
+        if not cards:
+            print("No more cards found, ending pagination.")  # Debug print
+            break
+            
+        # Process cards for this page
+        for card in cards:
+            try:
+                # Only update cards that already exist in the DataFrame
+                card_id = safe_str(getattr(card, 'id', None))
+                if card_id is None:
+                    continue
+                existing_card = df[df['id'] == card_id]
+                if not existing_card.empty:
+                    # Get the market price
+                    try:
+                        market_price = get_market_price(card.tcgplayer.prices) if hasattr(card, 'tcgplayer') else None
+                        df.loc[existing_card.index, price_column] = market_price
+                        print(f"Card: {safe_str(card.name)}, Price: {market_price}")
+                    except (AttributeError, TypeError):
+                        df.loc[existing_card.index, price_column] = None
+                    cards_processed += 1
+                    # Save every 100 cards in case of interruption
+                    if cards_processed % 100 == 0:
+                        df.to_csv("pokemon_cards_clean.csv", index=False)
+                        print(f"Saved {cards_processed} cards with updated pricing data so far...")
+                else:
+                    print(f"Skipping {safe_str(card.name)} - card not in CSV")
+            except Exception as e:
+                print(f"Error processing card: {str(e)}")
+                continue
+        page += 1
 except Exception as e:
-    print(f"An error occurred: {str(e)}")
+    print("Error in outer try block:")
+    if isinstance(e, bytes):
+        print(e.decode('utf-8', errors='replace'))
+    else:
+        print(e)
 
 # Final save
-df.to_csv("pokemon_cards.csv", index=False)
-print(f"\nData successfully saved to pokemon_cards.csv with {len(df)} cards")
+df.to_csv("pokemon_cards_clean.csv", index=False)
+print(f"\nData successfully saved to pokemon_cards_clean.csv with {len(df)} cards")
 print(f"Added new price column: {price_column}")
 
 
