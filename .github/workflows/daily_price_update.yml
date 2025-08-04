@@ -64,4 +64,4 @@ jobs:
         echo "- **Date:** $(date)" >> $GITHUB_STEP_SUMMARY
         echo "- **Status:** ✅ Completed" >> $GITHUB_STEP_SUMMARY
         echo "- **Database:** Updated and committed" >> $GITHUB_STEP_SUMMARY
-        echo "- **Next run:** Tomorrow at 12:30 AM UTC" >> $GITHUB_STEP_SUMMARY 
+        echo "- **Next run:** Tomorrow at 12:30 AM UTC" >> $GITHUB_STEP_SUMMARY # Trigger workflow detection
