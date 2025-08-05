@@ -20,9 +20,9 @@ logging.basicConfig(
 )
 
 # Load dataset
-logging.info("Loading art_scoring.csv...")
-df = pd.read_csv("art_scoring.csv")
-logging.info(f"Loaded {len(df)} cards from art_scoring.csv")
+logging.info("Loading pokemon_cards_clean.csv...")
+df = pd.read_csv("pokemon_cards_clean.csv")
+logging.info(f"Loaded {len(df)} cards from pokemon_cards_clean.csv")
 
 # Run on entire dataset
 logging.info(f"PRODUCTION MODE: Processing all {len(df)} cards")

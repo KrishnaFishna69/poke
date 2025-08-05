@@ -5,6 +5,45 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import StandardScaler
 import ast
 import re
+import sqlite3
+import logging
+
+# Set up logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('similar_card_rec.log'),
+        logging.StreamHandler()
+    ]
+)
+
+def load_data_from_sql():
+    """
+    Load data from SQLite database instead of CSV
+    """
+    try:
+        conn = sqlite3.connect("pokemon_cards.db")
+        
+        # Load all card data with features
+        query = """
+            SELECT c.*, 
+                   COALESCE(c.art_score_0_10, 0) as art_score,
+                   COALESCE(0, 0) as competitive_score,
+                   COALESCE('Unknown', 'Unknown') as competitive_tier
+            FROM cards c
+            WHERE c.supertype IN ('Pokémon', 'Trainer', 'Energy')
+        """
+        
+        df = pd.read_sql_query(query, conn)
+        conn.close()
+        
+        logging.info(f"Loaded {len(df)} cards from database")
+        return df
+        
+    except Exception as e:
+        logging.error(f"Error loading data from database: {e}")
+        return None
 
 def parse_list_string(s):
     """Parse string representations of lists safely"""
@@ -178,8 +217,12 @@ def main():
     print("Loading Pokemon cards data...")
     
     # Read the CSV file
-    df = pd.read_csv('pokemon_cards.csv', low_memory=False)
+    df = load_data_from_sql()
     
+    if df is None:
+        print("Failed to load data from database. Exiting.")
+        return
+
     print(f"Loaded {len(df)} cards")
     
     # Remove duplicates based on name and keep the one with highest popularity

@@ -415,3 +415,80 @@ Stack trace:
 2025-06-19 14:19:20,769 - INFO - Feature importance plot saved to feature_importance.png
 2025-06-19 14:19:20,769 - INFO - Decision tree visualizations saved
 2025-06-19 14:19:20,776 - INFO - Price prediction pipeline completed successfully!
+2025-08-04 19:03:06,615 - INFO - Starting price prediction pipeline...
+2025-08-04 19:03:06,616 - ERROR - No price columns found in database
+2025-08-04 19:03:26,545 - INFO - Starting price prediction pipeline...
+2025-08-04 19:03:26,546 - ERROR - No price columns found in price_history table
+2025-08-04 19:03:26,546 - ERROR - Failed to load data from database. Exiting.
+2025-08-04 19:03:45,419 - INFO - Starting price prediction pipeline...
+2025-08-04 19:03:45,420 - INFO - Found 0 columns in price_history table
+2025-08-04 19:03:45,420 - INFO - Found 0 price columns: []...
+2025-08-04 19:03:45,420 - ERROR - No price columns found in price_history table
+2025-08-04 19:03:45,420 - ERROR - Failed to load data from database. Exiting.
+2025-08-04 19:04:12,695 - INFO - Starting price prediction pipeline...
+2025-08-04 19:04:12,696 - INFO - Found 69 columns in price_history table
+2025-08-04 19:04:12,696 - INFO - Found 68 price columns: ['cardMarketPrice-05-29-25', 'cardMarketPrice-05-30-25', 'cardMarketPrice-05-31-25', 'cardMarketPrice-06-01-25', 'cardMarketPrice-06-02-25']...
+2025-08-04 19:04:12,696 - INFO - Using price column: cardMarketPrice-08-04-25-test
+2025-08-04 19:04:12,696 - ERROR - Error loading data from database: Execution failed on sql '
+            SELECT c.*, 
+                   COALESCE(c.art_score_0_10, 0) as art_score,
+                   COALESCE(c.competitive_score, 0) as competitive_score,
+                   COALESCE(c.competitive_tier, 'Unknown') as competitive_tier,
+                   COALESCE(ph."cardMarketPrice-08-04-25-test", 0) as current_price
+            FROM cards c
+            LEFT JOIN price_history ph ON c.id = ph.id
+            WHERE c.supertype IN ('Pokémon', 'Trainer', 'Energy')
+            AND ph."cardMarketPrice-08-04-25-test" IS NOT NULL 
+            AND ph."cardMarketPrice-08-04-25-test" > 0
+        ': no such column: c.competitive_score
+2025-08-04 19:04:12,696 - ERROR - Failed to load data from database. Exiting.
+2025-08-04 19:04:33,035 - INFO - Starting price prediction pipeline...
+2025-08-04 19:04:33,036 - INFO - Found 69 columns in price_history table
+2025-08-04 19:04:33,037 - INFO - Found 68 price columns: ['cardMarketPrice-05-29-25', 'cardMarketPrice-05-30-25', 'cardMarketPrice-05-31-25', 'cardMarketPrice-06-01-25', 'cardMarketPrice-06-02-25']...
+2025-08-04 19:04:33,037 - INFO - Using price column: cardMarketPrice-08-04-25
+2025-08-04 19:04:34,992 - INFO - Loaded 18168 cards with price data from database
+2025-08-04 19:04:35,026 - INFO - Preparing data for XGBoost model...
+2025-08-04 19:04:35,029 - INFO - Starting feature preprocessing...
+2025-08-04 19:04:35,039 - INFO - Extracting set IDs...
+2025-08-04 19:04:35,055 - INFO - Extracting Standard legality...
+2025-08-04 19:04:35,068 - INFO - Processing subtypes...
+2025-08-04 19:04:35,072 - INFO - Processing types...
+2025-08-04 19:04:35,075 - INFO - Processing competitive tiers...
+2025-08-04 19:04:35,085 - INFO - Feature preprocessing complete. Using 12 features.
+2025-08-04 19:04:35,085 - INFO - Encoding categorical features...
+2025-08-04 19:04:35,111 - INFO - Encoded supertype with 3 unique values
+2025-08-04 19:04:35,113 - INFO - Encoded subtypes_str with 1 unique values
+2025-08-04 19:04:35,116 - INFO - Encoded types_str with 1 unique values
+2025-08-04 19:04:35,119 - INFO - Encoded set_id with 156 unique values
+2025-08-04 19:04:35,124 - INFO - Encoded artist with 361 unique values
+2025-08-04 19:04:35,129 - INFO - Encoded rarity with 36 unique values
+2025-08-04 19:04:35,131 - INFO - Encoded standard_legal with 2 unique values
+2025-08-04 19:04:35,141 - INFO - Encoded popularity_votes with 144 unique values
+2025-08-04 19:04:35,151 - INFO - Encoded avg_votes with 164 unique values
+2025-08-04 19:04:35,178 - INFO - Encoded art_score with 9781 unique values
+2025-08-04 19:04:35,183 - INFO - Encoded competitive_score with 1 unique values
+2025-08-04 19:04:35,188 - INFO - Encoded competitive_tier_numeric with 1 unique values
+2025-08-04 19:04:35,191 - INFO - Final dataset: 18168 samples with 12 features
+2025-08-04 19:04:35,191 - INFO - Target variable range: 0.05 to 2499.99
+2025-08-04 19:04:35,199 - INFO - Training XGBoost model...
+2025-08-04 19:04:35,444 - INFO - Model Performance:
+2025-08-04 19:04:35,444 - INFO - Train MSE: 757.08
+2025-08-04 19:04:35,444 - INFO - Test MSE: 3112.00
+2025-08-04 19:04:35,444 - INFO - Train MAE: 8.79
+2025-08-04 19:04:35,445 - INFO - Test MAE: 12.84
+2025-08-04 19:04:35,445 - INFO - Train R²: 0.8475
+2025-08-04 19:04:35,445 - INFO - Test R²: 0.4098
+2025-08-04 19:04:35,445 - INFO - Plotting feature importance...
+2025-08-04 19:04:53,353 - INFO - Exporting predictions CSV...
+2025-08-04 19:04:53,388 - INFO - Predictions exported to price_predictions.csv
+2025-08-04 19:04:53,388 - INFO - Top 10 cards with largest residuals:
+2025-08-04 19:04:53,389 - INFO - Visualizing decision tree structure...
+2025-08-04 19:04:53,410 - WARNING - Could not create decision tree visualization: You must install graphviz to plot tree
+2025-08-04 19:04:53,410 - INFO - This might be due to XGBoost version or system limitations
+2025-08-04 19:04:53,410 - INFO - Analyzing feature contributions...
+2025-08-04 19:04:53,411 - WARNING - Could not analyze feature contributions: XGBModel.predict() got an unexpected keyword argument 'pred_contribs'
+2025-08-04 19:04:53,411 - INFO - This might be due to XGBoost version differences
+2025-08-04 19:04:53,421 - INFO - Model and encoders saved to price_prediction_model.pkl and price_prediction_encoders.pkl
+2025-08-04 19:04:53,421 - INFO - Feature importance plot saved to feature_importance.png
+2025-08-04 19:04:53,421 - INFO - Decision tree visualizations saved
+2025-08-04 19:04:53,425 - INFO - Price prediction pipeline completed successfully!

@@ -1,0 +1,150 @@
+2025-08-04 18:13:44,370 - INFO - 🚀 Starting Neural Network Competitive Scoring
+2025-08-04 18:13:44,371 - INFO - 🚀 Starting Neural Network Competitive Scoring
+2025-08-04 18:13:44,666 - INFO - 📊 Loaded 18178 cards from database
+2025-08-04 18:13:44,666 - INFO - 📊 Loaded 18178 cards from database
+2025-08-04 18:13:44,666 - INFO - 🔄 Extracting features from cards...
+2025-08-04 18:13:44,666 - INFO - 🔄 Extracting features from cards...
+2025-08-04 18:13:47,333 - INFO - ✅ Extracted 18178 cards with 36 features
+2025-08-04 18:13:47,332 - INFO - ✅ Extracted 18178 cards with 36 features
+2025-08-04 18:13:47,341 - INFO - 🏷️ Generating competitive viability labels...
+2025-08-04 18:13:47,342 - INFO - 🏷️ Generating competitive viability labels...
+2025-08-04 18:13:48,190 - INFO - ✅ Generated labels with average score: 0.219
+2025-08-04 18:13:48,194 - INFO - 🧠 Training neural network model...
+2025-08-04 18:13:48,220 - INFO - ✅ Generated labels with average score: 0.219
+2025-08-04 18:13:48,224 - INFO - 🧠 Training neural network model...
+2025-08-04 18:14:15,127 - INFO - ✅ Model trained successfully!
+2025-08-04 18:14:15,128 - INFO -    MSE: 0.0000
+2025-08-04 18:14:15,128 - INFO -    R²: 0.9992
+2025-08-04 18:14:15,128 - INFO - 🎯 Scoring all cards for competitive viability...
+2025-08-04 18:14:43,340 - INFO - ✅ Model trained successfully!
+2025-08-04 18:14:43,341 - INFO -    MSE: 0.0000
+2025-08-04 18:14:43,341 - INFO -    R²: 0.9997
+2025-08-04 18:14:43,341 - INFO - 🎯 Scoring all cards for competitive viability...
+2025-08-04 18:32:23,439 - INFO - 🏆 Top 20 Competitive Cards:
+2025-08-04 18:32:23,441 - INFO -    Tyranitar δ: 0.302 (C-Tier)
+2025-08-04 18:32:23,441 - INFO -    Zapdos: 0.301 (C-Tier)
+2025-08-04 18:32:23,441 - INFO -    Zapdos: 0.301 (C-Tier)
+2025-08-04 18:32:23,441 - INFO -    Zapdos: 0.301 (C-Tier)
+2025-08-04 18:32:23,442 - INFO -    Zeraora: 0.301 (C-Tier)
+2025-08-04 18:32:23,442 - INFO -    Zeraora: 0.301 (C-Tier)
+2025-08-04 18:32:23,442 - INFO -    Zapdos: 0.301 (C-Tier)
+2025-08-04 18:32:23,442 - INFO -    Zapdos: 0.301 (C-Tier)
+2025-08-04 18:32:23,442 - INFO -    Zapdos: 0.301 (C-Tier)
+2025-08-04 18:32:23,442 - INFO -    Stunfisk: 0.301 (C-Tier)
+2025-08-04 18:32:23,442 - INFO -    Detective Pikachu: 0.301 (C-Tier)
+2025-08-04 18:32:23,442 - INFO -    Frost Rotom: 0.301 (C-Tier)
+2025-08-04 18:32:23,442 - INFO -    Mow Rotom: 0.301 (C-Tier)
+2025-08-04 18:32:23,442 - INFO -    Wash Rotom: 0.301 (C-Tier)
+2025-08-04 18:32:23,442 - INFO -    Stunfisk: 0.301 (C-Tier)
+2025-08-04 18:32:23,442 - INFO -    Oricorio: 0.301 (C-Tier)
+2025-08-04 18:32:23,442 - INFO -    Oricorio: 0.301 (C-Tier)
+2025-08-04 18:32:23,442 - INFO -    Detective Pikachu: 0.301 (C-Tier)
+2025-08-04 18:32:23,442 - INFO -    Detective Pikachu: 0.301 (C-Tier)
+2025-08-04 18:32:23,442 - INFO -    Detective Pikachu: 0.301 (C-Tier)
+2025-08-04 18:32:23,655 - INFO - 💾 Results saved to competitive_scores_20250804_183223.csv
+2025-08-04 18:32:23,661 - WARNING - You are saving your model as an HDF5 file via `model.save()` or `keras.saving.save_model(model)`. This file format is considered legacy. We recommend using instead the native Keras format, e.g. `model.save('my_model.keras')` or `keras.saving.save_model(model, 'my_model.keras')`. 
+2025-08-04 18:32:23,713 - INFO - 💾 Model saved to competitive_scoring_model.h5
+2025-08-04 18:32:23,713 - INFO - 📊 Competitive Score Statistics:
+2025-08-04 18:32:23,713 - INFO -    Average Score: 0.219
+2025-08-04 18:32:23,715 - INFO -    Median Score: 0.268
+2025-08-04 18:32:23,717 - INFO -    S-Tier Cards: 0
+2025-08-04 18:32:23,718 - INFO -    A-Tier Cards: 0
+2025-08-04 18:32:23,719 - INFO -    B-Tier Cards: 0
+2025-08-04 18:32:23,719 - INFO - 🎉 Neural Network Competitive Scoring Complete!
+2025-08-04 18:32:42,609 - INFO - 🏆 Top 20 Competitive Cards:
+2025-08-04 18:32:42,609 - INFO -    Pikachu & Zekrom-GX: 0.299 (C-Tier)
+2025-08-04 18:32:42,609 - INFO -    Pikachu & Zekrom-GX: 0.299 (C-Tier)
+2025-08-04 18:32:42,610 - INFO -    Pikachu & Zekrom-GX: 0.299 (C-Tier)
+2025-08-04 18:32:42,610 - INFO -    Pikachu & Zekrom-GX: 0.299 (C-Tier)
+2025-08-04 18:32:42,610 - INFO -    Pikachu & Zekrom-GX: 0.299 (C-Tier)
+2025-08-04 18:32:42,610 - INFO -    Jumpluff: 0.299 (C-Tier)
+2025-08-04 18:32:42,610 - INFO -    Reuniclus: 0.299 (C-Tier)
+2025-08-04 18:32:42,610 - INFO -    Reuniclus: 0.299 (C-Tier)
+2025-08-04 18:32:42,610 - INFO -    Reuniclus: 0.299 (C-Tier)
+2025-08-04 18:32:42,610 - INFO -    Reuniclus: 0.299 (C-Tier)
+2025-08-04 18:32:42,610 - INFO -    Reuniclus: 0.299 (C-Tier)
+2025-08-04 18:32:42,610 - INFO -    Gengar: 0.299 (C-Tier)
+2025-08-04 18:32:42,610 - INFO -    Gengar: 0.299 (C-Tier)
+2025-08-04 18:32:42,610 - INFO -    Reuniclus: 0.299 (C-Tier)
+2025-08-04 18:32:42,610 - INFO -    Mew VMAX: 0.299 (C-Tier)
+2025-08-04 18:32:42,610 - INFO -    Sylveon VMAX: 0.299 (C-Tier)
+2025-08-04 18:32:42,610 - INFO -    Sylveon VMAX: 0.299 (C-Tier)
+2025-08-04 18:32:42,610 - INFO -    Sylveon VMAX: 0.299 (C-Tier)
+2025-08-04 18:32:42,610 - INFO -    Mew VMAX: 0.299 (C-Tier)
+2025-08-04 18:32:42,611 - INFO -    Mew VMAX: 0.299 (C-Tier)
+2025-08-04 18:32:42,677 - INFO - 💾 Results saved to competitive_scores_20250804_183242.csv
+2025-08-04 18:32:42,677 - WARNING - You are saving your model as an HDF5 file via `model.save()` or `keras.saving.save_model(model)`. This file format is considered legacy. We recommend using instead the native Keras format, e.g. `model.save('my_model.keras')` or `keras.saving.save_model(model, 'my_model.keras')`. 
+2025-08-04 18:32:42,697 - INFO - 💾 Model saved to competitive_scoring_model.h5
+2025-08-04 18:32:42,697 - INFO - 📊 Competitive Score Statistics:
+2025-08-04 18:32:42,698 - INFO -    Average Score: 0.218
+2025-08-04 18:32:42,699 - INFO -    Median Score: 0.265
+2025-08-04 18:32:42,700 - INFO -    S-Tier Cards: 0
+2025-08-04 18:32:42,701 - INFO -    A-Tier Cards: 0
+2025-08-04 18:32:42,702 - INFO -    B-Tier Cards: 0
+2025-08-04 18:32:42,702 - INFO - 🎉 Neural Network Competitive Scoring Complete!
+2025-08-04 18:37:26,813 - INFO - 🚀 Starting Neural Network Competitive Scoring
+2025-08-04 18:37:26,887 - INFO - 📊 Loaded 18178 cards from database
+2025-08-04 18:37:26,887 - INFO - 🔄 Extracting features from cards...
+2025-08-04 18:37:28,279 - INFO - ✅ Extracted 18178 cards with 47 features
+2025-08-04 18:37:28,285 - INFO - 🏷️ Generating competitive viability labels...
+2025-08-04 18:37:29,423 - INFO - ✅ Generated labels with average score: 0.174
+2025-08-04 18:37:29,424 - INFO -    Score range: 0.000 - 0.300
+2025-08-04 18:37:29,426 - INFO -    Score std: 0.076
+2025-08-04 18:37:29,431 - INFO - 🧠 Training neural network model...
+2025-08-04 18:38:00,182 - INFO - ✅ Model trained successfully!
+2025-08-04 18:38:00,182 - INFO -    MSE: 0.0007
+2025-08-04 18:38:00,182 - INFO -    R²: 0.8685
+2025-08-04 18:38:00,183 - INFO -    Predicted range: 0.005 - 0.252
+2025-08-04 18:38:00,183 - INFO - 🎯 Scoring all cards for competitive viability...
+2025-08-04 18:58:16,738 - INFO - 🚀 Starting Neural Network Competitive Scoring
+2025-08-04 18:58:16,828 - INFO - 📊 Loaded 18178 cards from database
+2025-08-04 18:58:16,828 - INFO - 🔄 Extracting features from cards...
+2025-08-04 18:58:18,265 - INFO - ✅ Extracted 18178 cards with 47 features
+2025-08-04 18:58:18,271 - INFO - 🏷️ Generating competitive viability labels...
+2025-08-04 18:58:19,197 - INFO - ✅ Generated labels with average score: 0.175
+2025-08-04 18:58:19,198 - INFO -    Score range: 0.000 - 0.300
+2025-08-04 18:58:19,198 - INFO -    Score std: 0.075
+2025-08-04 18:58:19,201 - INFO - 🧠 Training neural network model...
+2025-08-04 18:59:12,186 - INFO - ✅ Model trained successfully!
+2025-08-04 18:59:12,186 - INFO -    MSE: 0.0007
+2025-08-04 18:59:12,186 - INFO -    R²: 0.8739
+2025-08-04 18:59:12,186 - INFO -    Predicted range: 0.007 - 0.257
+2025-08-04 18:59:12,187 - INFO - 🎯 Scoring all cards for competitive viability...
+2025-08-04 19:17:56,111 - INFO - 🏆 Top 20 Competitive Cards:
+2025-08-04 19:17:56,112 - INFO -    Deoxys: 0.264 (S-Tier)
+2025-08-04 19:17:56,112 - INFO -    Venusaur ex: 0.257 (S-Tier)
+2025-08-04 19:17:56,112 - INFO -    Venusaur ex: 0.257 (S-Tier)
+2025-08-04 19:17:56,112 - INFO -    Venusaur ex: 0.257 (S-Tier)
+2025-08-04 19:17:56,112 - INFO -    Torterra ex: 0.257 (S-Tier)
+2025-08-04 19:17:56,112 - INFO -    Torterra ex: 0.257 (S-Tier)
+2025-08-04 19:17:56,112 - INFO -    Venusaur ex: 0.257 (S-Tier)
+2025-08-04 19:17:56,112 - INFO -    Hydrapple ex: 0.257 (S-Tier)
+2025-08-04 19:17:56,113 - INFO -    Hydrapple ex: 0.257 (S-Tier)
+2025-08-04 19:17:56,113 - INFO -    Hydrapple ex: 0.257 (S-Tier)
+2025-08-04 19:17:56,113 - INFO -    Hydrapple ex: 0.257 (S-Tier)
+2025-08-04 19:17:56,113 - INFO -    Decidueye ex: 0.257 (S-Tier)
+2025-08-04 19:17:56,113 - INFO -    Arboliva ex: 0.256 (S-Tier)
+2025-08-04 19:17:56,113 - INFO -    Arboliva ex: 0.256 (S-Tier)
+2025-08-04 19:17:56,113 - INFO -    Meowscarada ex: 0.256 (S-Tier)
+2025-08-04 19:17:56,113 - INFO -    Meowscarada ex: 0.256 (S-Tier)
+2025-08-04 19:17:56,113 - INFO -    Meowscarada ex: 0.256 (S-Tier)
+2025-08-04 19:17:56,113 - INFO -    Meowscarada ex: 0.256 (S-Tier)
+2025-08-04 19:17:56,113 - INFO -    Meowscarada ex: 0.256 (S-Tier)
+2025-08-04 19:17:56,113 - INFO -    Meowscarada ex: 0.256 (S-Tier)
+2025-08-04 19:17:56,174 - INFO - 💾 Results saved to competitive_scores_20250804_191756.csv
+2025-08-04 19:17:56,180 - INFO - ✅ Added competitive_score column to cards table
+2025-08-04 19:17:56,181 - INFO - ✅ Added competitive_tier column to cards table
+2025-08-04 19:21:09,508 - INFO - ✅ Updated competitive scores for 18178 cards in database
+2025-08-04 19:21:09,509 - WARNING - You are saving your model as an HDF5 file via `model.save()` or `keras.saving.save_model(model)`. This file format is considered legacy. We recommend using instead the native Keras format, e.g. `model.save('my_model.keras')` or `keras.saving.save_model(model, 'my_model.keras')`. 
+2025-08-04 19:21:09,586 - INFO - 💾 Model saved to competitive_scoring_model.h5
+2025-08-04 19:21:09,586 - INFO - 📊 Competitive Score Statistics:
+2025-08-04 19:21:09,587 - INFO -    Average Score: 0.175
+2025-08-04 19:21:09,589 - INFO -    Median Score: 0.200
+2025-08-04 19:21:09,589 - INFO -    Score Range: 0.006 - 0.264
+2025-08-04 19:21:09,590 - INFO -    Score Std: 0.070
+2025-08-04 19:21:09,595 - INFO -    S-Tier Cards: 3638
+2025-08-04 19:21:09,597 - INFO -    A-Tier Cards: 3675
+2025-08-04 19:21:09,599 - INFO -    B-Tier Cards: 3621
+2025-08-04 19:21:09,601 - INFO -    C-Tier Cards: 3683
+2025-08-04 19:21:09,605 - INFO -    D-Tier Cards: 3561
+2025-08-04 19:21:09,605 - INFO - 🎉 Neural Network Competitive Scoring Complete!

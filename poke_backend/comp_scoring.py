@@ -1,318 +1,642 @@
+#!/usr/bin/env python3
+"""
+Neural Network-Based Pokemon Card Competitive Viability Scoring
+Uses card features to predict competitive viability scores
+"""
+print("lol")
 import pandas as pd
-import requests
+import numpy as np
+import sqlite3
 import json
-import time
 import logging
-from tqdm import tqdm
 import re
+from datetime import datetime
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.metrics import mean_squared_error, r2_score
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
+import warnings
+warnings.filterwarnings('ignore')
 
-# Set up logging
+# Setup logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('comp_scoring.log'),
+        logging.FileHandler('neural_comp_scoring.log'),
         logging.StreamHandler()
     ]
 )
 
-def create_competitive_token(row):
-    """
-    Create a competitive token string from card data if the card is Standard legal.
-    """
-    try:
-        # Check if card is Standard legal - parse the legalities string
-        legalities_str = str(row.get('legalities', ''))
+class PokemonCardNeuralScorer:
+    def __init__(self):
+        self.model = None
+        self.scaler = StandardScaler()
+        self.label_encoders = {}
+        self.feature_columns = []
+        self.numerical_features = []
+        self.categorical_features = []
         
-        # Parse the legalities string format: "Legality(unlimited='Legal', expanded=None, standard=None)"
-        if 'standard=' in legalities_str:
-            # Extract the standard legality value
-            import re
-            standard_match = re.search(r"standard='([^']*)'", legalities_str)
-            if standard_match:
-                standard_legality = standard_match.group(1)
-                if standard_legality != 'Legal':
-                    return None
+    def parse_attacks(self, attacks_str):
+        """Parse attack information and extract numerical features"""
+        if pd.isna(attacks_str) or not attacks_str:
+            return {
+                'attack_count': 0,
+                'total_damage': 0,
+                'avg_damage': 0,
+                'max_damage': 0,
+                'total_energy_cost': 0,
+                'avg_energy_cost': 0,
+                'has_special_effects': 0,
+                'damage_per_energy': 0,
+                'has_high_damage': 0,
+                'has_low_cost': 0
+            }
+        
+        try:
+            if isinstance(attacks_str, str):
+                # Parse string format
+                attacks = json.loads(attacks_str.replace("'", '"'))
+            elif isinstance(attacks_str, list):
+                attacks = attacks_str
             else:
-                # If standard is None or not found, card is not Standard legal
-                return None
-        else:
-            # No standard legality info, assume not legal
-            return None
+                return self.parse_attacks(None)
+            
+            attack_count = len(attacks)
+            damages = []
+            energy_costs = []
+            has_special_effects = 0
+            damage_per_energy_ratios = []
+            
+            for attack in attacks:
+                # Extract damage
+                damage = attack.get('damage', '0')
+                if isinstance(damage, str):
+                    # Convert damage strings to numbers
+                    if damage == 'N/A' or damage == '':
+                        damage = 0
+                    else:
+                        damage = int(damage) if damage.isdigit() else 0
+                damages.append(damage)
+                
+                # Extract energy cost
+                energy_cost = len(attack.get('convertedEnergyCost', []))
+                energy_costs.append(energy_cost)
+                
+                # Calculate damage per energy ratio
+                if energy_cost > 0:
+                    damage_per_energy_ratios.append(damage / energy_cost)
+                else:
+                    damage_per_energy_ratios.append(0)
+                
+                # Check for special effects
+                text = attack.get('text', '').lower()
+                if any(keyword in text for keyword in ['draw', 'search', 'heal', 'prevent', 'switch', 'evolve', 'paralyze', 'poison', 'burn']):
+                    has_special_effects = 1
+            
+            # Calculate additional features
+            has_high_damage = 1 if max(damages) >= 120 else 0
+            has_low_cost = 1 if min(energy_costs) <= 1 else 0
+            avg_damage_per_energy = np.mean(damage_per_energy_ratios) if damage_per_energy_ratios else 0
+            
+            return {
+                'attack_count': attack_count,
+                'total_damage': sum(damages),
+                'avg_damage': np.mean(damages) if damages else 0,
+                'max_damage': max(damages) if damages else 0,
+                'total_energy_cost': sum(energy_costs),
+                'avg_energy_cost': np.mean(energy_costs) if energy_costs else 0,
+                'has_special_effects': has_special_effects,
+                'damage_per_energy': avg_damage_per_energy,
+                'has_high_damage': has_high_damage,
+                'has_low_cost': has_low_cost
+            }
+        except Exception as e:
+            logging.warning(f"Error parsing attacks: {e}")
+            return self.parse_attacks(None)
+    
+    def parse_weaknesses_resistances(self, weaknesses_str, resistances_str):
+        """Parse weaknesses and resistances"""
+        def parse_type_modifiers(modifiers_str):
+            if pd.isna(modifiers_str) or not modifiers_str:
+                return {'count': 0, 'total_modifier': 0, 'avg_modifier': 0, 'has_weakness': 0, 'has_resistance': 0}
+            
+            try:
+                if isinstance(modifiers_str, str):
+                    modifiers = json.loads(modifiers_str.replace("'", '"'))
+                elif isinstance(modifiers_str, list):
+                    modifiers = modifiers_str
+                else:
+                    return {'count': 0, 'total_modifier': 0, 'avg_modifier': 0, 'has_weakness': 0, 'has_resistance': 0}
+                
+                modifiers_list = []
+                for modifier in modifiers:
+                    value = modifier.get('value', '0')
+                    if isinstance(value, str):
+                        if value == 'N/A' or value == '':
+                            value = 0
+                        else:
+                            # Extract number from strings like "×2", "+30", etc.
+                            value = re.findall(r'[\d.]+', value)
+                            value = float(value[0]) if value else 0
+                    modifiers_list.append(value)
+                
+                return {
+                    'count': len(modifiers_list),
+                    'total_modifier': sum(modifiers_list),
+                    'avg_modifier': np.mean(modifiers_list) if modifiers_list else 0,
+                    'has_weakness': 1 if any(v > 1 for v in modifiers_list) else 0,
+                    'has_resistance': 1 if any(v < 1 and v > 0 for v in modifiers_list) else 0
+                }
+            except Exception as e:
+                logging.warning(f"Error parsing modifiers: {e}")
+                return {'count': 0, 'total_modifier': 0, 'avg_modifier': 0, 'has_weakness': 0, 'has_resistance': 0}
         
-        # Build competitive token string
-        token_parts = []
+        weaknesses = parse_type_modifiers(weaknesses_str)
+        resistances = parse_type_modifiers(resistances_str)
         
-        # Supertype
-        if pd.notna(row.get('supertype')):
-            token_parts.append(f"Supertype: {row['supertype']}")
-        
-        # Subtypes
-        if pd.notna(row.get('subtypes')) and isinstance(row['subtypes'], list):
-            subtypes_str = ', '.join(row['subtypes'])
-            token_parts.append(f"Subtypes: {subtypes_str}")
-        
-        # HP
-        if pd.notna(row.get('hp')):
-            token_parts.append(f"HP: {row['hp']}")
-        
-        # Types
-        if pd.notna(row.get('types')) and isinstance(row['types'], list):
-            types_str = ', '.join(row['types'])
-            token_parts.append(f"Types: {types_str}")
-        
-        # Rules
-        if pd.notna(row.get('rules')) and isinstance(row['rules'], list):
-            rules_str = '; '.join(row['rules'])
-            token_parts.append(f"Rules: {rules_str}")
-        
-        # Abilities
-        if pd.notna(row.get('abilities')) and isinstance(row['abilities'], list):
-            abilities_str = '; '.join([f"{ability.get('name', '')}: {ability.get('text', '')}" 
-                                     for ability in row['abilities']])
-            token_parts.append(f"Abilities: {abilities_str}")
-        
-        # Attacks
-        if pd.notna(row.get('attacks')) and isinstance(row['attacks'], list):
-            attacks_str = '; '.join([f"{attack.get('name', '')}: {attack.get('text', '')} "
-                                   f"(Damage: {attack.get('damage', 'N/A')}, "
-                                   f"Cost: {', '.join(attack.get('convertedEnergyCost', []))})"
-                                   for attack in row['attacks']])
-            token_parts.append(f"Attacks: {attacks_str}")
-        
-        # Weaknesses
-        if pd.notna(row.get('weaknesses')) and isinstance(row['weaknesses'], list):
-            weaknesses_str = ', '.join([f"{weakness.get('type', '')} ({weakness.get('value', '')})"
-                                      for weakness in row['weaknesses']])
-            token_parts.append(f"Weaknesses: {weaknesses_str}")
-        
-        # Resistances
-        if pd.notna(row.get('resistances')) and isinstance(row['resistances'], list):
-            resistances_str = ', '.join([f"{resistance.get('type', '')} ({resistance.get('value', '')})"
-                                       for resistance in row['resistances']])
-            token_parts.append(f"Resistances: {resistances_str}")
-        
-        # Retreat Cost
-        if pd.notna(row.get('retreatCost')):
-            retreat_cost_str = ', '.join(row['retreatCost']) if isinstance(row['retreatCost'], list) else str(row['retreatCost'])
-            token_parts.append(f"Retreat Cost: {retreat_cost_str}")
-        
-        # Converted Retreat Cost
-        if pd.notna(row.get('convertedRetreatCost')):
-            token_parts.append(f"Converted Retreat Cost: {row['convertedRetreatCost']}")
-        
-        return ' | '.join(token_parts) if token_parts else None
-        
-    except Exception as e:
-        logging.error(f"Error creating competitive token for card {row.get('id', 'unknown')}: {str(e)}")
-        return None
-
-def query_ollama(prompt, model_name="qwen:latest", temperature=0.2):
-    """
-    Query Ollama API for competitive viability scoring.
-    """
-    try:
-        url = "http://localhost:11434/api/generate"
-        payload = {
-            "model": model_name,
-            "prompt": prompt,
-            "stream": False,
-            "options": {"temperature": temperature}
+        return {
+            'weakness_count': weaknesses['count'],
+            'weakness_avg': weaknesses['avg_modifier'],
+            'resistance_count': resistances['count'],
+            'resistance_avg': resistances['avg_modifier'],
+            'has_weakness': weaknesses['has_weakness'],
+            'has_resistance': resistances['has_resistance']
         }
-        
-        response = requests.post(url, json=payload, timeout=60)
-        response.raise_for_status()
-        
-        result = response.json()
-        return result.get('response', '').strip()
-        
-    except Exception as e:
-        logging.error(f"Error querying Ollama: {str(e)}")
-        return None
-
-def extract_score_from_response(response):
-    """
-    Extract numerical score from Ollama response with improved regex.
-    """
-    try:
-        if not response:
-            return None
-        
-        # Debug: log the actual response to see what we're getting
-        logging.info(f"Raw LLM response: '{response}'")
-        
-        # Extract number 0-100 as a full response only
-        match = re.search(r'^\s*(\d{1,3})(?:\.\d+)?\s*$', response.strip())
-        if match:
-            score = float(match.group(1))
-            return max(0, min(100, score))  # Clamp between 0 and 100
-        
-        # Fallback: look for any number in the response
-        numbers = re.findall(r'\b(\d{1,3})(?:\.\d+)?\b', response)
-        if numbers:
-            score = float(numbers[0])
-            return max(0, min(100, score))
-        
-        # Additional fallback: look for numbers with decimal points
-        decimal_match = re.search(r'(\d+\.\d+)', response)
-        if decimal_match:
-            score = float(decimal_match.group(1))
-            return max(0, min(100, score))
-        
-        # Last resort: look for any number pattern
-        any_number = re.search(r'(\d+(?:\.\d+)?)', response)
-        if any_number:
-            score = float(any_number.group(1))
-            return max(0, min(100, score))
-        
-        logging.warning(f"Could not extract score from response: '{response}'")
-        return None
-    except Exception as e:
-        logging.error(f"Error extracting score from response: {str(e)}")
-        return None
-
-def score_competitive_viability(competitive_token, temperature=0.2, retries=2):
-    """
-    Score competitive viability using Ollama with retry mechanism.
-    """
-    if not competitive_token:
-        return None
     
-    prompt = f"""
-    You are an expert Pokémon TCG meta analyst AI. Your task is to assign a single real number score from 0 to 100 for each card, reflecting its competitive viability in the current meta. Scores should be consistent and precise across runs: a card's score represents its relative strength and impact on winning games today.
-
-    Use the following guidelines:
-
-    - 0 = completely unplayable or irrelevant in the current meta.
-    - 100 = top-tier, dominant meta-defining card.
-    - Scores between should reflect how useful and common the card is in competitive decks.
-
-    Consider these examples:
-
-    High-scoring meta Pokémon:
-
-    - Dragapult EX (HP 170, Ability "Infiltrate" lets it move damage counters, fast 130 damage attack, used in aggressive decks for rapid pressure and disruption): 94.5
-
-    - Gardevoir EX (HP 170, attacks that deal high damage and provide healing, synergy with Fairy energy, key control attacker in many decks): 89.7
-
-    - Zacian V (HP 220, "Intrepid Sword" ability lets it draw cards and boost attack damage, 230 damage "Brave Blade" attack, staples in many decks): 92.0
-
-    High-scoring meta Items and Supporters:
-
-    - Choice Belt (Item, boosts damage done to opponent's Active Pokémon by 30, widely used for damage consistency): 82.3
-
-    - Professor's Research (Supporter, discards your hand and draws 7 new cards, essential for refreshing resources): 96.2
-
-    - Marnie (Supporter, shuffles opponent's hand into deck and draws cards yourself, great disruption and hand control): 88.5
-
-    - Quick Ball (Item, allows searching Basic Pokémon quickly from the deck, key for fast setup): 85.0
-
-    Low-scoring non-meta Pokémon:
-
-    - Magikarp (HP 30, no attacks or abilities, purely basic Pokémon with no competitive use): 5.0
-
-    - Caterpie (HP 40, weak attacks, no useful abilities, obsolete for competitive play): 8.0
-
-    Low-scoring non-meta Items and Supporters:
-
-    - Revive (Item, brings a Basic Pokémon from discard to hand but is slow and inefficient compared to modern recovery options): 10.0
-
-    - Energy Retrieval (Item, retrieves up to 2 basic Energy cards from discard, but slow and outclassed by newer cards): 15.0
-
-    - Professor Elm's Lecture (Supporter, draws 3 cards but is slow compared to other supporters and rarely played): 20.0
-
-    When scoring, consider:
-
-    - Card's stats (HP, damage output, abilities)
-    - Playstyle and deck role (aggressive attacker, control, setup)
-    - Popularity and presence in competitive decks
-    - Synergies with other meta cards
-    - Overall impact on win rates and strategies
-
-    Provide a precise single real number score for each card reflecting its competitive viability:{competitive_token}
-    """
-
-    for attempt in range(retries + 1):
-        response = query_ollama(prompt, temperature=temperature)
-        score = extract_score_from_response(response)
-        if score is not None:
-            return score
+    def extract_features(self, row):
+        """Extract all features from a card row"""
+        features = {}
         
-        if attempt < retries:
-            logging.warning(f"Attempt {attempt + 1} failed, retrying...")
-            time.sleep(0.5)
+        # Basic numerical features
+        features['hp'] = float(row.get('hp', 0)) if pd.notna(row.get('hp')) else 0
+        features['convertedRetreatCost'] = float(row.get('convertedRetreatCost', 0)) if pd.notna(row.get('convertedRetreatCost')) else 0
+        
+        # Categorical features
+        features['supertype'] = str(row.get('supertype', 'Unknown'))
+        
+        # Subtypes (count and presence of key subtypes)
+        subtypes = row.get('subtypes', [])
+        if isinstance(subtypes, str):
+            try:
+                subtypes = json.loads(subtypes.replace("'", '"'))
+            except:
+                subtypes = []
+        features['subtype_count'] = len(subtypes) if isinstance(subtypes, list) else 0
+        features['is_basic'] = 1 if isinstance(subtypes, list) and 'Basic' in subtypes else 0
+        features['is_stage1'] = 1 if isinstance(subtypes, list) and 'Stage 1' in subtypes else 0
+        features['is_stage2'] = 1 if isinstance(subtypes, list) and 'Stage 2' in subtypes else 0
+        features['is_vmax'] = 1 if isinstance(subtypes, list) and 'VMAX' in subtypes else 0
+        features['is_v'] = 1 if isinstance(subtypes, list) and 'V' in subtypes else 0
+        features['is_gx'] = 1 if isinstance(subtypes, list) and 'GX' in subtypes else 0
+        features['is_ex'] = 1 if isinstance(subtypes, list) and 'EX' in subtypes else 0
+        features['is_legendary'] = 1 if isinstance(subtypes, list) and 'Legendary' in subtypes else 0
+        features['is_ultra_beast'] = 1 if isinstance(subtypes, list) and 'Ultra Beast' in subtypes else 0
+        
+        # Types (count and presence of key types)
+        types = row.get('types', [])
+        if isinstance(types, str):
+            try:
+                types = json.loads(types.replace("'", '"'))
+            except:
+                types = []
+        features['type_count'] = len(types) if isinstance(types, list) else 0
+        features['is_colorless'] = 1 if isinstance(types, list) and 'Colorless' in types else 0
+        features['is_psychic'] = 1 if isinstance(types, list) and 'Psychic' in types else 0
+        features['is_fighting'] = 1 if isinstance(types, list) and 'Fighting' in types else 0
+        features['is_fire'] = 1 if isinstance(types, list) and 'Fire' in types else 0
+        features['is_water'] = 1 if isinstance(types, list) and 'Water' in types else 0
+        features['is_grass'] = 1 if isinstance(types, list) and 'Grass' in types else 0
+        features['is_lightning'] = 1 if isinstance(types, list) and 'Lightning' in types else 0
+        features['is_darkness'] = 1 if isinstance(types, list) and 'Darkness' in types else 0
+        features['is_metal'] = 1 if isinstance(types, list) and 'Metal' in types else 0
+        features['is_fairy'] = 1 if isinstance(types, list) and 'Fairy' in types else 0
+        features['is_dragon'] = 1 if isinstance(types, list) and 'Dragon' in types else 0
+        
+        # Parse attacks
+        attack_features = self.parse_attacks(row.get('attacks'))
+        features.update(attack_features)
+        
+        # Parse weaknesses and resistances
+        modifier_features = self.parse_weaknesses_resistances(
+            row.get('weaknesses'), 
+            row.get('resistances')
+        )
+        features.update(modifier_features)
+        
+        # Abilities (count and presence)
+        abilities = row.get('abilities', [])
+        if isinstance(abilities, str):
+            try:
+                abilities = json.loads(abilities.replace("'", '"'))
+            except:
+                abilities = []
+        features['ability_count'] = len(abilities) if isinstance(abilities, list) else 0
+        features['has_abilities'] = 1 if features['ability_count'] > 0 else 0
+        
+        # Rules text analysis
+        rules = row.get('rules', [])
+        if isinstance(rules, str):
+            try:
+                rules = json.loads(rules.replace("'", '"'))
+            except:
+                rules = []
+        rules_text = ' '.join(rules) if isinstance(rules, list) else str(rules)
+        features['rules_length'] = len(rules_text)
+        features['has_complex_rules'] = 1 if len(rules_text) > 100 else 0
+        
+        # Set information (newer sets tend to be more competitive)
+        set_name = str(row.get('set', {}).get('name', '')) if isinstance(row.get('set'), dict) else str(row.get('set', ''))
+        features['is_modern_set'] = 1 if any(year in set_name for year in ['2023', '2024', '2025', 'Scarlet', 'Violet', 'Paldea']) else 0
+        features['is_swsh_set'] = 1 if 'Sword' in set_name or 'Shield' in set_name else 0
+        
+        return features
     
-    logging.warning("Failed to get valid score after all retries.")
-    return None
+    def prepare_data(self, df):
+        """Prepare data for neural network training"""
+        logging.info("🔄 Extracting features from cards...")
+        
+        all_features = []
+        for idx, row in df.iterrows():
+            try:
+                features = self.extract_features(row)
+                all_features.append(features)
+            except Exception as e:
+                logging.warning(f"Error extracting features for card {row.get('name', 'unknown')}: {e}")
+                continue
+        
+        features_df = pd.DataFrame(all_features)
+        
+        # Separate numerical and categorical features
+        self.numerical_features = [
+            'hp', 'convertedRetreatCost', 'subtype_count', 'type_count',
+            'attack_count', 'total_damage', 'avg_damage', 'max_damage',
+            'total_energy_cost', 'avg_energy_cost', 'weakness_count',
+            'weakness_avg', 'resistance_count', 'resistance_avg', 'ability_count',
+            'rules_length', 'damage_per_energy'
+        ]
+        
+        self.categorical_features = [
+            'supertype', 'is_basic', 'is_stage1', 'is_stage2', 'is_vmax',
+            'is_v', 'is_gx', 'is_ex', 'is_legendary', 'is_ultra_beast',
+            'is_colorless', 'is_psychic', 'is_fighting', 'is_fire', 'is_water',
+            'is_grass', 'is_lightning', 'is_darkness', 'is_metal', 'is_fairy',
+            'is_dragon', 'has_special_effects', 'has_abilities', 'has_complex_rules',
+            'has_high_damage', 'has_low_cost', 'has_weakness', 'has_resistance',
+            'is_modern_set', 'is_swsh_set'
+        ]
+        
+        # Encode categorical features
+        for feature in self.categorical_features:
+            if feature in features_df.columns:
+                le = LabelEncoder()
+                features_df[feature] = le.fit_transform(features_df[feature].astype(str))
+                self.label_encoders[feature] = le
+        
+        # Scale numerical features
+        numerical_data = features_df[self.numerical_features].fillna(0)
+        scaled_numerical = self.scaler.fit_transform(numerical_data)
+        features_df[self.numerical_features] = scaled_numerical
+        
+        self.feature_columns = self.numerical_features + self.categorical_features
+        
+        logging.info(f"✅ Extracted {len(features_df)} cards with {len(self.feature_columns)} features")
+        return features_df
+    
+    def create_model(self, input_dim):
+        """Create neural network model"""
+        model = keras.Sequential([
+            layers.Dense(256, activation='relu', input_shape=(input_dim,)),
+            layers.Dropout(0.4),
+            layers.Dense(128, activation='relu'),
+            layers.Dropout(0.3),
+            layers.Dense(64, activation='relu'),
+            layers.Dropout(0.2),
+            layers.Dense(32, activation='relu'),
+            layers.Dropout(0.1),
+            layers.Dense(1, activation='sigmoid')  # Output competitive score 0-1
+        ])
+        
+        model.compile(
+            optimizer='adam',
+            loss='binary_crossentropy',
+            metrics=['accuracy', 'precision', 'recall']
+        )
+        
+        return model
+    
+    def generate_training_labels(self, df):
+        """Generate competitive viability labels based on card features"""
+        logging.info("🏷️ Generating competitive viability labels...")
+        
+        labels = []
+        for idx, row in df.iterrows():
+            score = 0.0
+            
+            # Base score from HP (0-20%)
+            hp = float(row.get('hp', 0)) if pd.notna(row.get('hp')) else 0
+            if hp > 0:
+                hp_score = min(hp / 300.0, 0.2)
+                score += hp_score
+            
+            # Attack damage contribution (0-25%)
+            attacks = self.parse_attacks(row.get('attacks'))
+            if attacks['max_damage'] > 0:
+                damage_score = min(attacks['max_damage'] / 300.0, 0.25)
+                score += damage_score
+            
+            # Damage per energy efficiency (0-15%)
+            if attacks['damage_per_energy'] > 0:
+                efficiency_score = min(attacks['damage_per_energy'] / 50.0, 0.15)
+                score += efficiency_score
+            
+            # Ability bonus (0-15%)
+            abilities = row.get('abilities', [])
+            if isinstance(abilities, list) and len(abilities) > 0:
+                score += 0.15
+            
+            # Type advantages (0-10%)
+            types = row.get('types', [])
+            if isinstance(types, list):
+                if len(types) > 1:  # Multi-type cards
+                    score += 0.05
+                if 'Colorless' in types:  # Colorless is flexible
+                    score += 0.05
+            
+            # Stage evolution bonus (0-15%)
+            subtypes = row.get('subtypes', [])
+            if isinstance(subtypes, list):
+                if 'VMAX' in subtypes:
+                    score += 0.15
+                elif 'V' in subtypes:
+                    score += 0.12
+                elif 'GX' in subtypes:
+                    score += 0.10
+                elif 'EX' in subtypes:
+                    score += 0.08
+                elif 'Legendary' in subtypes:
+                    score += 0.05
+            
+            # Special effects bonus (0-10%)
+            if attacks['has_special_effects']:
+                score += 0.10
+            
+            # Modern set bonus (0-5%)
+            set_name = str(row.get('set', {}).get('name', '')) if isinstance(row.get('set'), dict) else str(row.get('set', ''))
+            if any(year in set_name for year in ['2023', '2024', '2025', 'Scarlet', 'Violet', 'Paldea']):
+                score += 0.05
+            
+            # Add some randomness to create variation
+            import random
+            random.seed(hash(row.get('name', '')) % 1000)  # Deterministic randomness
+            score += random.uniform(-0.05, 0.05)
+            
+            # Normalize to 0-1 range
+            score = max(0.0, min(score, 1.0))
+            labels.append(score)
+        
+        logging.info(f"✅ Generated labels with average score: {np.mean(labels):.3f}")
+        logging.info(f"   Score range: {min(labels):.3f} - {max(labels):.3f}")
+        logging.info(f"   Score std: {np.std(labels):.3f}")
+        return np.array(labels)
+    
+    def train_model(self, features_df, labels, test_size=0.2):
+        """Train the neural network model"""
+        logging.info("🧠 Training neural network model...")
+        
+        # Split data
+        X_train, X_test, y_train, y_test = train_test_split(
+            features_df[self.feature_columns], labels, 
+            test_size=test_size, random_state=42
+        )
+        
+        # Create and train model
+        self.model = self.create_model(len(self.feature_columns))
+        
+        # Early stopping to prevent overfitting
+        early_stopping = keras.callbacks.EarlyStopping(
+            monitor='val_loss', patience=15, restore_best_weights=True
+        )
+        
+        history = self.model.fit(
+            X_train, y_train,
+            validation_data=(X_test, y_test),
+            epochs=150,
+            batch_size=32,
+            callbacks=[early_stopping],
+            verbose=1
+        )
+        
+        # Evaluate model
+        y_pred = self.model.predict(X_test)
+        mse = mean_squared_error(y_test, y_pred)
+        r2 = r2_score(y_test, y_pred)
+        
+        logging.info(f"✅ Model trained successfully!")
+        logging.info(f"   MSE: {mse:.4f}")
+        logging.info(f"   R²: {r2:.4f}")
+        logging.info(f"   Predicted range: {y_pred.min():.3f} - {y_pred.max():.3f}")
+        
+        return history, (X_test, y_test, y_pred)
+    
+    def predict_competitive_score(self, card_data):
+        """Predict competitive score for a single card"""
+        if self.model is None:
+            raise ValueError("Model not trained. Call train_model() first.")
+        
+        # Extract features
+        features = self.extract_features(card_data)
+        features_df = pd.DataFrame([features])
+        
+        # Encode categorical features
+        for feature in self.categorical_features:
+            if feature in features_df.columns and feature in self.label_encoders:
+                le = self.label_encoders[feature]
+                features_df[feature] = le.transform(features_df[feature].astype(str))
+        
+        # Scale numerical features
+        numerical_data = features_df[self.numerical_features].fillna(0)
+        scaled_numerical = self.scaler.transform(numerical_data)
+        features_df[self.numerical_features] = scaled_numerical
+        
+        # Predict
+        score = self.model.predict(features_df[self.feature_columns])[0][0]
+        return float(score)
+    
+    def score_all_cards(self, df):
+        """Score all cards in the dataset"""
+        logging.info("🎯 Scoring all cards for competitive viability...")
+        
+        # First pass: get all scores for even distribution
+        all_scores = []
+        for idx, row in df.iterrows():
+            try:
+                score = self.predict_competitive_score(row)
+                all_scores.append(score)
+            except Exception as e:
+                logging.warning(f"Error scoring card {row.get('name', 'unknown')}: {e}")
+                all_scores.append(0.0)
+        
+        # Second pass: categorize with even distribution
+        scores = []
+        for idx, row in df.iterrows():
+            try:
+                score = all_scores[idx]
+                scores.append({
+                    'id': row.get('id'),
+                    'name': row.get('name'),
+                    'supertype': row.get('supertype'),
+                    'competitive_score': score,
+                    'score_category': self.categorize_score(score, all_scores)
+                })
+            except Exception as e:
+                logging.warning(f"Error processing card {row.get('name', 'unknown')}: {e}")
+                scores.append({
+                    'id': row.get('id'),
+                    'name': row.get('name'),
+                    'supertype': row.get('supertype'),
+                    'competitive_score': 0.0,
+                    'score_category': 'Unknown'
+                })
+        
+        scores_df = pd.DataFrame(scores)
+        
+        # Show top competitive cards
+        top_cards = scores_df.nlargest(20, 'competitive_score')
+        logging.info("🏆 Top 20 Competitive Cards:")
+        for _, card in top_cards.iterrows():
+            logging.info(f"   {card['name']}: {card['competitive_score']:.3f} ({card['score_category']})")
+        
+        return scores_df
+    
+    def categorize_score(self, score, all_scores=None):
+        """Categorize competitive score with even distribution if all_scores provided"""
+        if all_scores is not None:
+            # Sort all scores to find percentile cutoffs for even distribution
+            sorted_scores = sorted(all_scores)
+            n = len(sorted_scores)
+            
+            # Calculate percentile cutoffs for even distribution (20% each)
+            s_cutoff = sorted_scores[int(0.8 * n)]  # Top 20%
+            a_cutoff = sorted_scores[int(0.6 * n)]  # Next 20%
+            b_cutoff = sorted_scores[int(0.4 * n)]  # Next 20%
+            c_cutoff = sorted_scores[int(0.2 * n)]  # Next 20%
+            # Bottom 20% is D-Tier
+            
+            if score >= s_cutoff:
+                return "S-Tier"
+            elif score >= a_cutoff:
+                return "A-Tier"
+            elif score >= b_cutoff:
+                return "B-Tier"
+            elif score >= c_cutoff:
+                return "C-Tier"
+            else:
+                return "D-Tier"
+        else:
+            # Fallback to fixed thresholds
+            if score >= 0.8:
+                return "S-Tier"
+            elif score >= 0.6:
+                return "A-Tier"
+            elif score >= 0.4:
+                return "B-Tier"
+            elif score >= 0.2:
+                return "C-Tier"
+            else:
+                return "D-Tier"
 
 def main():
-    # Load dataset
-    logging.info("Loading comp_scoring.csv...")
-    df = pd.read_csv("comp_scoring.csv")
-    logging.info(f"Loaded {len(df)} cards from comp_scoring.csv")
+    """Main function to run the neural network competitive scoring"""
+    logging.info("🚀 Starting Neural Network Competitive Scoring")
     
-    # Create competitive tokens
-    logging.info("Creating competitive tokens...")
-    df['competitive_token'] = df.apply(create_competitive_token, axis=1)
+    # Load data from database
+    try:
+        conn = sqlite3.connect("pokemon_cards.db")
+        df = pd.read_sql_query("""
+            SELECT * FROM card_info 
+            WHERE supertype IN ('Pokémon', 'Trainer', 'Energy')
+        """, conn)
+        conn.close()
+        logging.info(f"📊 Loaded {len(df)} cards from database")
+    except Exception as e:
+        logging.error(f"❌ Error loading data: {e}")
+        return
     
-    # Count legal cards
-    legal_cards = df['competitive_token'].notna().sum()
-    logging.info(f"Found {legal_cards} Standard legal cards out of {len(df)} total cards")
+    # Initialize scorer
+    scorer = PokemonCardNeuralScorer()
     
-    # Process all legal cards
-    legal_df = df[df['competitive_token'].notna()].copy()
-    logging.info(f"Scoring {len(legal_df)} legal cards, 5 times each (temperature=0.2)...")
+    # Prepare data
+    features_df = scorer.prepare_data(df)
     
-    # TEST MODE: Just test with first card to debug
-    legal_df = legal_df.head(1).copy()
-    logging.info(f"🧪 TEST MODE: Testing with just 1 card to debug")
+    # Generate labels
+    labels = scorer.generate_training_labels(df)
     
-    start_time = time.time()
+    # Train model
+    history, (X_test, y_test, y_pred) = scorer.train_model(features_df, labels)
     
-    # Prepare columns for 5 runs
-    for i in range(1, 6):
-        df[f'CompViabilityScore_{i}'] = None
+    # Score all cards
+    scores_df = scorer.score_all_cards(df)
     
-    # Score each card 5 times
-    for idx, row in tqdm(legal_df.iterrows(), total=len(legal_df), desc="Scoring competitive viability"):
-        for run in range(1, 6):
-            score = score_competitive_viability(row['competitive_token'], temperature=0.2)
-            df.at[idx, f'CompViabilityScore_{run}'] = score
-            logging.info(f"Card {row.get('id', 'unknown')} run {run}: {score}")
-            time.sleep(0.2)
+    # Save results to CSV
+    output_file = f"competitive_scores_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+    scores_df.to_csv(output_file, index=False)
+    logging.info(f"💾 Results saved to {output_file}")
     
-    # Compute average
-    score_cols = [f'CompViabilityScore_{i}' for i in range(1, 6)]
-    df['CompViabilityScore_Avg'] = df[score_cols].astype(float).mean(axis=1)
+    # Add competitive scores to SQL database
+    try:
+        conn = sqlite3.connect("pokemon_cards.db")
+        cursor = conn.cursor()
+        
+        # Check if competitive_score column exists, add if not
+        cursor.execute("PRAGMA table_info(cards)")
+        columns = [col[1] for col in cursor.fetchall()]
+        
+        if 'competitive_score' not in columns:
+            cursor.execute("ALTER TABLE cards ADD COLUMN competitive_score REAL")
+            logging.info("✅ Added competitive_score column to cards table")
+        
+        if 'competitive_tier' not in columns:
+            cursor.execute("ALTER TABLE cards ADD COLUMN competitive_tier TEXT")
+            logging.info("✅ Added competitive_tier column to cards table")
+        
+        # Update competitive scores in database
+        updated_count = 0
+        for _, row in scores_df.iterrows():
+            cursor.execute("""
+                UPDATE cards 
+                SET competitive_score = ?, competitive_tier = ?
+                WHERE id = ?
+            """, (row['competitive_score'], row['score_category'], row['id']))
+            updated_count += cursor.rowcount
+        
+        conn.commit()
+        conn.close()
+        logging.info(f"✅ Updated competitive scores for {updated_count} cards in database")
+        
+    except Exception as e:
+        logging.error(f"❌ Error updating database: {e}")
     
-    end_time = time.time()
-    logging.info(f"✅ Completed competitive scoring in {end_time - start_time:.2f} seconds")
+    # Save model
+    model_file = "competitive_scoring_model.h5"
+    scorer.model.save(model_file)
+    logging.info(f"💾 Model saved to {model_file}")
     
-    # Save results
-    df.to_csv("comp_scoring.csv", index=False)
-    logging.info("Results saved to comp_scoring.csv")
+    # Show statistics
+    logging.info("📊 Competitive Score Statistics:")
+    logging.info(f"   Average Score: {scores_df['competitive_score'].mean():.3f}")
+    logging.info(f"   Median Score: {scores_df['competitive_score'].median():.3f}")
+    logging.info(f"   Score Range: {scores_df['competitive_score'].min():.3f} - {scores_df['competitive_score'].max():.3f}")
+    logging.info(f"   Score Std: {scores_df['competitive_score'].std():.3f}")
+    logging.info(f"   S-Tier Cards: {len(scores_df[scores_df['score_category'] == 'S-Tier'])}")
+    logging.info(f"   A-Tier Cards: {len(scores_df[scores_df['score_category'] == 'A-Tier'])}")
+    logging.info(f"   B-Tier Cards: {len(scores_df[scores_df['score_category'] == 'B-Tier'])}")
+    logging.info(f"   C-Tier Cards: {len(scores_df[scores_df['score_category'] == 'C-Tier'])}")
+    logging.info(f"   D-Tier Cards: {len(scores_df[scores_df['score_category'] == 'D-Tier'])}")
     
-    # Print summary statistics
-    if 'CompViabilityScore_Avg' in df.columns:
-        valid_scores = df['CompViabilityScore_Avg'].dropna()
-        if len(valid_scores) > 0:
-            logging.info(f"Competitive scoring summary:")
-            logging.info(f"  Cards scored: {len(valid_scores)}")
-            logging.info(f"  Average score: {valid_scores.mean():.2f}")
-            logging.info(f"  Min score: {valid_scores.min():.2f}")
-            logging.info(f"  Max score: {valid_scores.max():.2f}")
-            
-            # Show the first few scored cards
-            scored_cards = df[df['CompViabilityScore_Avg'].notna()][['id', 'name', 'CompViabilityScore_Avg']].head(5)
-            logging.info("First few scored cards:")
-            for _, card in scored_cards.iterrows():
-                logging.info(f"  {card['id']} - {card['name']}: {card['CompViabilityScore_Avg']}")
-        else:
-            logging.info("No valid scores found.")
-    else:
-        logging.info("CompViabilityScore_Avg column not created.")
-    
-    logging.info("Full experiment complete!")
+    logging.info("🎉 Neural Network Competitive Scoring Complete!")
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,581 @@
+2025-08-04 18:46:17,277 - INFO - 🧪 Testing Pokemon Price Forecasting System
+2025-08-04 18:46:17,278 - INFO - 
+📊 Testing forecast for card: base1-4
+2025-08-04 18:46:17,279 - ERROR - Error getting card info for base1-4: Execution failed on sql '
+                SELECT id, name, supertype, subtypes, types, hp, 
+                       attacks, abilities, weaknesses, resistances
+                FROM card_info 
+                WHERE id = ?
+            ': no such column: attacks
+2025-08-04 18:46:17,285 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:46:17,285 - INFO -    Card: Unknown
+2025-08-04 18:46:17,286 - INFO -    Last known price: $0.00
+2025-08-04 18:46:17,286 - INFO -    Data points used: 0
+2025-08-04 18:46:17,286 - INFO -    7-day prediction: $0.00
+2025-08-04 18:46:17,286 - INFO -    95% CI: $0.00 - $0.00
+2025-08-04 18:46:17,286 - INFO - 
+📊 Testing forecast for card: base1-2
+2025-08-04 18:46:17,286 - ERROR - Error getting card info for base1-2: Execution failed on sql '
+                SELECT id, name, supertype, subtypes, types, hp, 
+                       attacks, abilities, weaknesses, resistances
+                FROM card_info 
+                WHERE id = ?
+            ': no such column: attacks
+2025-08-04 18:46:17,287 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:46:17,287 - INFO -    Card: Unknown
+2025-08-04 18:46:17,287 - INFO -    Last known price: $0.00
+2025-08-04 18:46:17,287 - INFO -    Data points used: 0
+2025-08-04 18:46:17,287 - INFO -    7-day prediction: $0.00
+2025-08-04 18:46:17,287 - INFO -    95% CI: $0.00 - $0.00
+2025-08-04 18:46:17,287 - INFO - 
+📊 Testing forecast for card: base1-15
+2025-08-04 18:46:17,287 - ERROR - Error getting card info for base1-15: Execution failed on sql '
+                SELECT id, name, supertype, subtypes, types, hp, 
+                       attacks, abilities, weaknesses, resistances
+                FROM card_info 
+                WHERE id = ?
+            ': no such column: attacks
+2025-08-04 18:46:17,288 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:46:17,288 - INFO -    Card: Unknown
+2025-08-04 18:46:17,288 - INFO -    Last known price: $0.00
+2025-08-04 18:46:17,288 - INFO -    Data points used: 0
+2025-08-04 18:46:17,288 - INFO -    7-day prediction: $0.00
+2025-08-04 18:46:17,288 - INFO -    95% CI: $0.00 - $0.00
+2025-08-04 18:46:17,288 - INFO - 
+📋 Testing forecast summary for base1-4
+2025-08-04 18:46:17,288 - ERROR - Error getting card info for base1-4: Execution failed on sql '
+                SELECT id, name, supertype, subtypes, types, hp, 
+                       attacks, abilities, weaknesses, resistances
+                FROM card_info 
+                WHERE id = ?
+            ': no such column: attacks
+2025-08-04 18:46:17,288 - INFO -    Trend: stable
+2025-08-04 18:46:17,289 - INFO -    Volatility: 0.00
+2025-08-04 18:46:17,289 - INFO -    Quality: low
+2025-08-04 18:50:05,691 - INFO - 🧪 Testing Pokemon Price Forecasting System
+2025-08-04 18:50:05,691 - INFO - 
+📊 Testing forecast for card: base1-1
+2025-08-04 18:50:05,843 - ERROR - Error getting price history for card base1-1: Execution failed on sql '
+                SELECT id, cardMarketPrice-05-29-25, cardMarketPrice-05-30-25, cardMarketPrice-05-31-25, cardMarketPrice-06-01-25, cardMarketPrice-06-02-25, cardMarketPrice-06-03-25, cardMarketPrice-06-04-25, cardMarketPrice-06-05-25, cardMarketPrice-06-06-25, cardMarketPrice-06-07-25, cardMarketPrice-06-08-25, cardMarketPrice-06-09-25, cardMarketPrice-06-10-25, cardMarketPrice-06-11-25, cardMarketPrice-06-12-25, cardMarketPrice-06-13-25, cardMarketPrice-06-14-25, cardMarketPrice-06-15-25, cardMarketPrice-06-16-25, cardMarketPrice-06-17-25, cardMarketPrice-06-18-25, cardMarketPrice-06-19-25, cardMarketPrice-06-20-25, cardMarketPrice-06-21-25, cardMarketPrice-06-22-25, cardMarketPrice-06-23-25, cardMarketPrice-06-24-25, cardMarketPrice-06-25-25, cardMarketPrice-06-26-25, cardMarketPrice-06-27-25, cardMarketPrice-06-28-25, cardMarketPrice-07-01-25, cardMarketPrice-07-02-25, cardMarketPrice-07-03-25, cardMarketPrice-07-04-25, cardMarketPrice-07-05-25, cardMarketPrice-07-06-25, cardMarketPrice-07-07-25, cardMarketPrice-07-08-25, cardMarketPrice-07-09-25, cardMarketPrice-07-10-25, cardMarketPrice-07-11-25, cardMarketPrice-07-12-25, cardMarketPrice-07-13-25, cardMarketPrice-07-14-25, cardMarketPrice-07-15-25, cardMarketPrice-07-16-25, cardMarketPrice-07-17-25, cardMarketPrice-07-18-25, cardMarketPrice-07-19-25, cardMarketPrice-07-20-25, cardMarketPrice-07-21-25, cardMarketPrice-07-22-25, cardMarketPrice-07-23-25, cardMarketPrice-07-24-25, cardMarketPrice-07-25-25, cardMarketPrice-07-26-25, cardMarketPrice-07-27-25, cardMarketPrice-07-28-25, cardMarketPrice-07-29-25, cardMarketPrice-07-30-25, cardMarketPrice-07-31-25, cardMarketPrice-08-01-25, cardMarketPrice-08-02-25, cardMarketPrice-08-03-25, cardMarketPrice-08-04-25, cardMarketPrice-08-04-25-test, cardMarketPrice-08-04-25-simulation
+                FROM price_history 
+                WHERE id = ?
+            ': no such column: cardMarketPrice
+2025-08-04 18:50:05,850 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:50:05,850 - INFO -    Card: Unknown
+2025-08-04 18:50:05,850 - INFO -    Last known price: $0.00
+2025-08-04 18:50:05,850 - INFO -    Data points used: 0
+2025-08-04 18:50:05,850 - INFO -    7-day prediction: $0.00
+2025-08-04 18:50:05,850 - INFO -    95% CI: $0.00 - $0.00
+2025-08-04 18:50:05,850 - INFO - 
+📊 Testing forecast for card: base1-10
+2025-08-04 18:50:05,867 - ERROR - Error getting price history for card base1-10: Execution failed on sql '
+                SELECT id, cardMarketPrice-05-29-25, cardMarketPrice-05-30-25, cardMarketPrice-05-31-25, cardMarketPrice-06-01-25, cardMarketPrice-06-02-25, cardMarketPrice-06-03-25, cardMarketPrice-06-04-25, cardMarketPrice-06-05-25, cardMarketPrice-06-06-25, cardMarketPrice-06-07-25, cardMarketPrice-06-08-25, cardMarketPrice-06-09-25, cardMarketPrice-06-10-25, cardMarketPrice-06-11-25, cardMarketPrice-06-12-25, cardMarketPrice-06-13-25, cardMarketPrice-06-14-25, cardMarketPrice-06-15-25, cardMarketPrice-06-16-25, cardMarketPrice-06-17-25, cardMarketPrice-06-18-25, cardMarketPrice-06-19-25, cardMarketPrice-06-20-25, cardMarketPrice-06-21-25, cardMarketPrice-06-22-25, cardMarketPrice-06-23-25, cardMarketPrice-06-24-25, cardMarketPrice-06-25-25, cardMarketPrice-06-26-25, cardMarketPrice-06-27-25, cardMarketPrice-06-28-25, cardMarketPrice-07-01-25, cardMarketPrice-07-02-25, cardMarketPrice-07-03-25, cardMarketPrice-07-04-25, cardMarketPrice-07-05-25, cardMarketPrice-07-06-25, cardMarketPrice-07-07-25, cardMarketPrice-07-08-25, cardMarketPrice-07-09-25, cardMarketPrice-07-10-25, cardMarketPrice-07-11-25, cardMarketPrice-07-12-25, cardMarketPrice-07-13-25, cardMarketPrice-07-14-25, cardMarketPrice-07-15-25, cardMarketPrice-07-16-25, cardMarketPrice-07-17-25, cardMarketPrice-07-18-25, cardMarketPrice-07-19-25, cardMarketPrice-07-20-25, cardMarketPrice-07-21-25, cardMarketPrice-07-22-25, cardMarketPrice-07-23-25, cardMarketPrice-07-24-25, cardMarketPrice-07-25-25, cardMarketPrice-07-26-25, cardMarketPrice-07-27-25, cardMarketPrice-07-28-25, cardMarketPrice-07-29-25, cardMarketPrice-07-30-25, cardMarketPrice-07-31-25, cardMarketPrice-08-01-25, cardMarketPrice-08-02-25, cardMarketPrice-08-03-25, cardMarketPrice-08-04-25, cardMarketPrice-08-04-25-test, cardMarketPrice-08-04-25-simulation
+                FROM price_history 
+                WHERE id = ?
+            ': no such column: cardMarketPrice
+2025-08-04 18:50:05,867 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:50:05,868 - INFO -    Card: Unknown
+2025-08-04 18:50:05,868 - INFO -    Last known price: $0.00
+2025-08-04 18:50:05,868 - INFO -    Data points used: 0
+2025-08-04 18:50:05,868 - INFO -    7-day prediction: $0.00
+2025-08-04 18:50:05,868 - INFO -    95% CI: $0.00 - $0.00
+2025-08-04 18:50:05,868 - INFO - 
+📊 Testing forecast for card: base1-100
+2025-08-04 18:50:05,892 - ERROR - Error getting price history for card base1-100: Execution failed on sql '
+                SELECT id, cardMarketPrice-05-29-25, cardMarketPrice-05-30-25, cardMarketPrice-05-31-25, cardMarketPrice-06-01-25, cardMarketPrice-06-02-25, cardMarketPrice-06-03-25, cardMarketPrice-06-04-25, cardMarketPrice-06-05-25, cardMarketPrice-06-06-25, cardMarketPrice-06-07-25, cardMarketPrice-06-08-25, cardMarketPrice-06-09-25, cardMarketPrice-06-10-25, cardMarketPrice-06-11-25, cardMarketPrice-06-12-25, cardMarketPrice-06-13-25, cardMarketPrice-06-14-25, cardMarketPrice-06-15-25, cardMarketPrice-06-16-25, cardMarketPrice-06-17-25, cardMarketPrice-06-18-25, cardMarketPrice-06-19-25, cardMarketPrice-06-20-25, cardMarketPrice-06-21-25, cardMarketPrice-06-22-25, cardMarketPrice-06-23-25, cardMarketPrice-06-24-25, cardMarketPrice-06-25-25, cardMarketPrice-06-26-25, cardMarketPrice-06-27-25, cardMarketPrice-06-28-25, cardMarketPrice-07-01-25, cardMarketPrice-07-02-25, cardMarketPrice-07-03-25, cardMarketPrice-07-04-25, cardMarketPrice-07-05-25, cardMarketPrice-07-06-25, cardMarketPrice-07-07-25, cardMarketPrice-07-08-25, cardMarketPrice-07-09-25, cardMarketPrice-07-10-25, cardMarketPrice-07-11-25, cardMarketPrice-07-12-25, cardMarketPrice-07-13-25, cardMarketPrice-07-14-25, cardMarketPrice-07-15-25, cardMarketPrice-07-16-25, cardMarketPrice-07-17-25, cardMarketPrice-07-18-25, cardMarketPrice-07-19-25, cardMarketPrice-07-20-25, cardMarketPrice-07-21-25, cardMarketPrice-07-22-25, cardMarketPrice-07-23-25, cardMarketPrice-07-24-25, cardMarketPrice-07-25-25, cardMarketPrice-07-26-25, cardMarketPrice-07-27-25, cardMarketPrice-07-28-25, cardMarketPrice-07-29-25, cardMarketPrice-07-30-25, cardMarketPrice-07-31-25, cardMarketPrice-08-01-25, cardMarketPrice-08-02-25, cardMarketPrice-08-03-25, cardMarketPrice-08-04-25, cardMarketPrice-08-04-25-test, cardMarketPrice-08-04-25-simulation
+                FROM price_history 
+                WHERE id = ?
+            ': no such column: cardMarketPrice
+2025-08-04 18:50:05,894 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:50:05,894 - INFO -    Card: Unknown
+2025-08-04 18:50:05,894 - INFO -    Last known price: $0.00
+2025-08-04 18:50:05,894 - INFO -    Data points used: 0
+2025-08-04 18:50:05,894 - INFO -    7-day prediction: $0.00
+2025-08-04 18:50:05,894 - INFO -    95% CI: $0.00 - $0.00
+2025-08-04 18:50:05,894 - INFO - 
+📋 Testing forecast summary for base1-1
+2025-08-04 18:50:05,912 - ERROR - Error getting price history for card base1-1: Execution failed on sql '
+                SELECT id, cardMarketPrice-05-29-25, cardMarketPrice-05-30-25, cardMarketPrice-05-31-25, cardMarketPrice-06-01-25, cardMarketPrice-06-02-25, cardMarketPrice-06-03-25, cardMarketPrice-06-04-25, cardMarketPrice-06-05-25, cardMarketPrice-06-06-25, cardMarketPrice-06-07-25, cardMarketPrice-06-08-25, cardMarketPrice-06-09-25, cardMarketPrice-06-10-25, cardMarketPrice-06-11-25, cardMarketPrice-06-12-25, cardMarketPrice-06-13-25, cardMarketPrice-06-14-25, cardMarketPrice-06-15-25, cardMarketPrice-06-16-25, cardMarketPrice-06-17-25, cardMarketPrice-06-18-25, cardMarketPrice-06-19-25, cardMarketPrice-06-20-25, cardMarketPrice-06-21-25, cardMarketPrice-06-22-25, cardMarketPrice-06-23-25, cardMarketPrice-06-24-25, cardMarketPrice-06-25-25, cardMarketPrice-06-26-25, cardMarketPrice-06-27-25, cardMarketPrice-06-28-25, cardMarketPrice-07-01-25, cardMarketPrice-07-02-25, cardMarketPrice-07-03-25, cardMarketPrice-07-04-25, cardMarketPrice-07-05-25, cardMarketPrice-07-06-25, cardMarketPrice-07-07-25, cardMarketPrice-07-08-25, cardMarketPrice-07-09-25, cardMarketPrice-07-10-25, cardMarketPrice-07-11-25, cardMarketPrice-07-12-25, cardMarketPrice-07-13-25, cardMarketPrice-07-14-25, cardMarketPrice-07-15-25, cardMarketPrice-07-16-25, cardMarketPrice-07-17-25, cardMarketPrice-07-18-25, cardMarketPrice-07-19-25, cardMarketPrice-07-20-25, cardMarketPrice-07-21-25, cardMarketPrice-07-22-25, cardMarketPrice-07-23-25, cardMarketPrice-07-24-25, cardMarketPrice-07-25-25, cardMarketPrice-07-26-25, cardMarketPrice-07-27-25, cardMarketPrice-07-28-25, cardMarketPrice-07-29-25, cardMarketPrice-07-30-25, cardMarketPrice-07-31-25, cardMarketPrice-08-01-25, cardMarketPrice-08-02-25, cardMarketPrice-08-03-25, cardMarketPrice-08-04-25, cardMarketPrice-08-04-25-test, cardMarketPrice-08-04-25-simulation
+                FROM price_history 
+                WHERE id = ?
+            ': no such column: cardMarketPrice
+2025-08-04 18:50:05,913 - INFO -    Trend: stable
+2025-08-04 18:50:05,913 - INFO -    Volatility: 0.00
+2025-08-04 18:50:05,913 - INFO -    Quality: low
+2025-08-04 18:50:16,558 - INFO - 🧪 Testing Pokemon Price Forecasting System
+2025-08-04 18:50:16,559 - INFO - 
+📊 Testing forecast for card: base1-1
+2025-08-04 18:50:16,739 - ERROR - Error getting price history for card base1-1: unconverted data remains when parsing with format "%m-%d-%y": "-test", at position 66. You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2025-08-04 18:50:16,740 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:50:16,740 - INFO -    Card: Unknown
+2025-08-04 18:50:16,740 - INFO -    Last known price: $0.00
+2025-08-04 18:50:16,740 - INFO -    Data points used: 0
+2025-08-04 18:50:16,740 - INFO -    7-day prediction: $0.00
+2025-08-04 18:50:16,740 - INFO -    95% CI: $0.00 - $0.00
+2025-08-04 18:50:16,741 - INFO - 
+📊 Testing forecast for card: base1-10
+2025-08-04 18:50:16,769 - ERROR - Error getting price history for card base1-10: unconverted data remains when parsing with format "%m-%d-%y": "-test", at position 66. You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2025-08-04 18:50:16,770 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:50:16,771 - INFO -    Card: Unknown
+2025-08-04 18:50:16,771 - INFO -    Last known price: $0.00
+2025-08-04 18:50:16,771 - INFO -    Data points used: 0
+2025-08-04 18:50:16,771 - INFO -    7-day prediction: $0.00
+2025-08-04 18:50:16,771 - INFO -    95% CI: $0.00 - $0.00
+2025-08-04 18:50:16,771 - INFO - 
+📊 Testing forecast for card: base1-100
+2025-08-04 18:50:16,792 - ERROR - Error getting price history for card base1-100: unconverted data remains when parsing with format "%m-%d-%y": "-test", at position 66. You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2025-08-04 18:50:16,794 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:50:16,800 - INFO -    Card: Unknown
+2025-08-04 18:50:16,801 - INFO -    Last known price: $0.00
+2025-08-04 18:50:16,801 - INFO -    Data points used: 0
+2025-08-04 18:50:16,801 - INFO -    7-day prediction: $0.00
+2025-08-04 18:50:16,801 - INFO -    95% CI: $0.00 - $0.00
+2025-08-04 18:50:16,801 - INFO - 
+📋 Testing forecast summary for base1-1
+2025-08-04 18:50:16,828 - ERROR - Error getting price history for card base1-1: unconverted data remains when parsing with format "%m-%d-%y": "-test", at position 66. You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2025-08-04 18:50:16,829 - INFO -    Trend: stable
+2025-08-04 18:50:16,829 - INFO -    Volatility: 0.00
+2025-08-04 18:50:16,829 - INFO -    Quality: low
+2025-08-04 18:50:29,004 - INFO - 🧪 Testing Pokemon Price Forecasting System
+2025-08-04 18:50:29,005 - INFO - 
+📊 Testing forecast for card: base1-1
+2025-08-04 18:50:29,113 - DEBUG - input tempfile: /var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpt0jy71y9/i81cr2ty.json
+2025-08-04 18:50:29,115 - DEBUG - input tempfile: /var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpt0jy71y9/eanmuqhv.json
+2025-08-04 18:50:29,116 - DEBUG - idx 0
+2025-08-04 18:50:29,116 - DEBUG - running CmdStan, num_threads: None
+2025-08-04 18:50:29,116 - DEBUG - CmdStan args: ['/Users/krishnakorrapati/Desktop/pokemon_clean/venv/lib/python3.13/site-packages/prophet/stan_model/prophet_model.bin', 'random', 'seed=58624', 'data', 'file=/var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpt0jy71y9/i81cr2ty.json', 'init=/var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpt0jy71y9/eanmuqhv.json', 'output', 'file=/var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpt0jy71y9/prophet_model8ypsf3lx/prophet_model-20250804185029.csv', 'method=optimize', 'algorithm=newton', 'iter=10000']
+2025-08-04 18:50:29,116 - INFO - Chain [1] start processing
+2025-08-04 18:50:30,759 - INFO - Chain [1] done processing
+2025-08-04 18:50:30,761 - ERROR - Error training ensemble model for card base1-1: Cannot cast ufunc 'lstsq' input 1 from dtype('O') to dtype('float64') with casting rule 'same_kind'
+2025-08-04 18:50:30,762 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:50:30,763 - INFO -    Card: Unknown
+2025-08-04 18:50:30,763 - INFO -    Last known price: $0.00
+2025-08-04 18:50:30,763 - INFO -    Data points used: 0
+2025-08-04 18:50:30,763 - INFO -    7-day prediction: $0.00
+2025-08-04 18:50:30,763 - INFO -    95% CI: $0.00 - $0.00
+2025-08-04 18:50:30,763 - INFO - 
+📊 Testing forecast for card: base1-10
+2025-08-04 18:50:30,800 - DEBUG - input tempfile: /var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpt0jy71y9/4ejo08t4.json
+2025-08-04 18:50:30,801 - DEBUG - input tempfile: /var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpt0jy71y9/esh1taia.json
+2025-08-04 18:50:30,801 - DEBUG - idx 0
+2025-08-04 18:50:30,801 - DEBUG - running CmdStan, num_threads: None
+2025-08-04 18:50:30,801 - DEBUG - CmdStan args: ['/Users/krishnakorrapati/Desktop/pokemon_clean/venv/lib/python3.13/site-packages/prophet/stan_model/prophet_model.bin', 'random', 'seed=70948', 'data', 'file=/var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpt0jy71y9/4ejo08t4.json', 'init=/var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpt0jy71y9/esh1taia.json', 'output', 'file=/var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpt0jy71y9/prophet_modelcxtfqp5r/prophet_model-20250804185030.csv', 'method=optimize', 'algorithm=newton', 'iter=10000']
+2025-08-04 18:50:30,801 - INFO - Chain [1] start processing
+2025-08-04 18:50:31,006 - INFO - Chain [1] done processing
+2025-08-04 18:50:31,008 - ERROR - Error training ensemble model for card base1-10: Cannot cast ufunc 'lstsq' input 1 from dtype('O') to dtype('float64') with casting rule 'same_kind'
+2025-08-04 18:50:31,009 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:50:31,009 - INFO -    Card: Unknown
+2025-08-04 18:50:31,009 - INFO -    Last known price: $0.00
+2025-08-04 18:50:31,009 - INFO -    Data points used: 0
+2025-08-04 18:50:31,009 - INFO -    7-day prediction: $0.00
+2025-08-04 18:50:31,009 - INFO -    95% CI: $0.00 - $0.00
+2025-08-04 18:50:31,009 - INFO - 
+📊 Testing forecast for card: base1-100
+2025-08-04 18:50:31,045 - DEBUG - input tempfile: /var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpt0jy71y9/qxz5yo6b.json
+2025-08-04 18:50:31,046 - DEBUG - input tempfile: /var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpt0jy71y9/lb5un1f0.json
+2025-08-04 18:50:31,047 - DEBUG - idx 0
+2025-08-04 18:50:31,047 - DEBUG - running CmdStan, num_threads: None
+2025-08-04 18:50:31,047 - DEBUG - CmdStan args: ['/Users/krishnakorrapati/Desktop/pokemon_clean/venv/lib/python3.13/site-packages/prophet/stan_model/prophet_model.bin', 'random', 'seed=86005', 'data', 'file=/var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpt0jy71y9/qxz5yo6b.json', 'init=/var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpt0jy71y9/lb5un1f0.json', 'output', 'file=/var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpt0jy71y9/prophet_model1u69fqo7/prophet_model-20250804185031.csv', 'method=optimize', 'algorithm=newton', 'iter=10000']
+2025-08-04 18:50:31,047 - INFO - Chain [1] start processing
+2025-08-04 18:50:31,239 - INFO - Chain [1] done processing
+2025-08-04 18:50:31,241 - ERROR - Error training ensemble model for card base1-100: Cannot cast ufunc 'lstsq' input 1 from dtype('O') to dtype('float64') with casting rule 'same_kind'
+2025-08-04 18:50:31,242 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:50:31,242 - INFO -    Card: Unknown
+2025-08-04 18:50:31,242 - INFO -    Last known price: $0.00
+2025-08-04 18:50:31,242 - INFO -    Data points used: 0
+2025-08-04 18:50:31,242 - INFO -    7-day prediction: $0.00
+2025-08-04 18:50:31,242 - INFO -    95% CI: $0.00 - $0.00
+2025-08-04 18:50:31,242 - INFO - 
+📋 Testing forecast summary for base1-1
+2025-08-04 18:50:31,271 - INFO -    Trend: stable
+2025-08-04 18:50:31,271 - INFO -    Volatility: 0.00
+2025-08-04 18:50:31,271 - INFO -    Quality: low
+2025-08-04 18:51:27,029 - INFO - 🧪 Testing Pokemon Price Forecasting System
+2025-08-04 18:51:27,029 - INFO - 
+📊 Testing forecast for card: base1-1
+2025-08-04 18:51:27,221 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:51:27,221 - INFO -    Card: Unknown
+2025-08-04 18:51:27,221 - INFO -    Last known price: $0.00
+2025-08-04 18:51:27,221 - INFO -    Data points used: 0
+2025-08-04 18:51:27,221 - INFO -    7-day prediction: $0.00
+2025-08-04 18:51:27,221 - INFO -    95% CI: $0.00 - $0.00
+2025-08-04 18:51:27,221 - INFO - 
+📊 Testing forecast for card: base1-10
+2025-08-04 18:51:27,249 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:51:27,249 - INFO -    Card: Unknown
+2025-08-04 18:51:27,249 - INFO -    Last known price: $0.00
+2025-08-04 18:51:27,249 - INFO -    Data points used: 0
+2025-08-04 18:51:27,249 - INFO -    7-day prediction: $0.00
+2025-08-04 18:51:27,249 - INFO -    95% CI: $0.00 - $0.00
+2025-08-04 18:51:27,249 - INFO - 
+📊 Testing forecast for card: base1-100
+2025-08-04 18:51:27,290 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:51:27,290 - INFO -    Card: Unknown
+2025-08-04 18:51:27,290 - INFO -    Last known price: $0.00
+2025-08-04 18:51:27,290 - INFO -    Data points used: 0
+2025-08-04 18:51:27,290 - INFO -    7-day prediction: $0.00
+2025-08-04 18:51:27,290 - INFO -    95% CI: $0.00 - $0.00
+2025-08-04 18:51:27,290 - INFO - 
+📋 Testing forecast summary for base1-1
+2025-08-04 18:51:27,317 - INFO -    Trend: stable
+2025-08-04 18:51:27,317 - INFO -    Volatility: 0.00
+2025-08-04 18:51:27,317 - INFO -    Quality: low
+2025-08-04 18:51:45,504 - INFO - 🧪 Testing Pokemon Price Forecasting System
+2025-08-04 18:51:45,504 - INFO - 
+📊 Testing forecast for card: base1-1
+2025-08-04 18:51:45,652 - INFO - Found 68 price columns for card base1-1
+2025-08-04 18:51:45,680 - INFO - Raw data shape: (1, 69)
+2025-08-04 18:51:45,681 - INFO - Transposed data shape: (68, 1)
+2025-08-04 18:51:45,683 - INFO - Sample data:                           price
+cardMarketPrice-05-29-25  61.31
+cardMarketPrice-05-30-25  61.31
+cardMarketPrice-05-31-25  61.31
+cardMarketPrice-06-01-25  61.31
+cardMarketPrice-06-02-25  60.86
+2025-08-04 18:51:45,688 - INFO - Valid dates found: 66
+2025-08-04 18:51:45,689 - INFO - Final data shape: (66, 1)
+2025-08-04 18:51:45,689 - INFO - Price range: 51.24 - 61.31
+2025-08-04 18:51:45,691 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:51:45,691 - INFO -    Card: Unknown
+2025-08-04 18:51:45,692 - INFO -    Last known price: $0.00
+2025-08-04 18:51:45,692 - INFO -    Data points used: 0
+2025-08-04 18:51:45,692 - INFO -    7-day prediction: $0.00
+2025-08-04 18:51:45,692 - INFO -    95% CI: $0.00 - $0.00
+2025-08-04 18:51:45,692 - INFO - 
+📊 Testing forecast for card: base1-10
+2025-08-04 18:51:45,706 - INFO - Found 68 price columns for card base1-10
+2025-08-04 18:51:45,712 - INFO - Raw data shape: (1, 69)
+2025-08-04 18:51:45,712 - INFO - Transposed data shape: (68, 1)
+2025-08-04 18:51:45,714 - INFO - Sample data:                           price
+cardMarketPrice-05-29-25  43.95
+cardMarketPrice-05-30-25  43.95
+cardMarketPrice-05-31-25  43.95
+cardMarketPrice-06-01-25  43.95
+cardMarketPrice-06-02-25  43.78
+2025-08-04 18:51:45,717 - INFO - Valid dates found: 66
+2025-08-04 18:51:45,718 - INFO - Final data shape: (66, 1)
+2025-08-04 18:51:45,718 - INFO - Price range: 38.84 - 44.34
+2025-08-04 18:51:45,720 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:51:45,720 - INFO -    Card: Unknown
+2025-08-04 18:51:45,720 - INFO -    Last known price: $0.00
+2025-08-04 18:51:45,721 - INFO -    Data points used: 0
+2025-08-04 18:51:45,721 - INFO -    7-day prediction: $0.00
+2025-08-04 18:51:45,721 - INFO -    95% CI: $0.00 - $0.00
+2025-08-04 18:51:45,721 - INFO - 
+📊 Testing forecast for card: base1-100
+2025-08-04 18:51:45,734 - INFO - Found 68 price columns for card base1-100
+2025-08-04 18:51:45,741 - INFO - Raw data shape: (1, 69)
+2025-08-04 18:51:45,741 - INFO - Transposed data shape: (68, 1)
+2025-08-04 18:51:45,742 - INFO - Sample data:                          price
+cardMarketPrice-05-29-25  0.37
+cardMarketPrice-05-30-25  0.37
+cardMarketPrice-05-31-25  0.37
+cardMarketPrice-06-01-25  0.37
+cardMarketPrice-06-02-25  0.37
+2025-08-04 18:51:45,745 - INFO - Valid dates found: 66
+2025-08-04 18:51:45,746 - INFO - Final data shape: (66, 1)
+2025-08-04 18:51:45,746 - INFO - Price range: 0.36 - 0.47
+2025-08-04 18:51:45,748 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:51:45,748 - INFO -    Card: Unknown
+2025-08-04 18:51:45,748 - INFO -    Last known price: $0.00
+2025-08-04 18:51:45,748 - INFO -    Data points used: 0
+2025-08-04 18:51:45,748 - INFO -    7-day prediction: $0.00
+2025-08-04 18:51:45,748 - INFO -    95% CI: $0.00 - $0.00
+2025-08-04 18:51:45,748 - INFO - 
+📋 Testing forecast summary for base1-1
+2025-08-04 18:51:45,763 - INFO - Found 68 price columns for card base1-1
+2025-08-04 18:51:45,769 - INFO - Raw data shape: (1, 69)
+2025-08-04 18:51:45,769 - INFO - Transposed data shape: (68, 1)
+2025-08-04 18:51:45,771 - INFO - Sample data:                           price
+cardMarketPrice-05-29-25  61.31
+cardMarketPrice-05-30-25  61.31
+cardMarketPrice-05-31-25  61.31
+cardMarketPrice-06-01-25  61.31
+cardMarketPrice-06-02-25  60.86
+2025-08-04 18:51:45,774 - INFO - Valid dates found: 66
+2025-08-04 18:51:45,775 - INFO - Final data shape: (66, 1)
+2025-08-04 18:51:45,775 - INFO - Price range: 51.24 - 61.31
+2025-08-04 18:51:45,777 - INFO -    Trend: stable
+2025-08-04 18:51:45,777 - INFO -    Volatility: 0.00
+2025-08-04 18:51:45,777 - INFO -    Quality: low
+2025-08-04 18:52:02,562 - INFO - 🧪 Testing Pokemon Price Forecasting System
+2025-08-04 18:52:02,562 - INFO - 
+📊 Testing forecast for card: base1-1
+2025-08-04 18:52:02,716 - INFO - Found 68 price columns for card base1-1
+2025-08-04 18:52:02,746 - INFO - Raw data shape: (1, 69)
+2025-08-04 18:52:02,747 - INFO - Transposed data shape: (68, 1)
+2025-08-04 18:52:02,749 - INFO - Sample data:                           price
+cardMarketPrice-05-29-25  61.31
+cardMarketPrice-05-30-25  61.31
+cardMarketPrice-05-31-25  61.31
+cardMarketPrice-06-01-25  61.31
+cardMarketPrice-06-02-25  60.86
+2025-08-04 18:52:02,754 - INFO - Valid dates found: 66
+2025-08-04 18:52:02,755 - INFO - Final data shape: (66, 1)
+2025-08-04 18:52:02,755 - INFO - Price range: 51.24 - 61.31
+2025-08-04 18:52:02,758 - INFO - Loaded existing model for base1-1
+2025-08-04 18:52:02,758 - INFO - Model for base1-1: {}
+2025-08-04 18:52:02,758 - WARNING - No models trained for base1-1, returning empty result
+2025-08-04 18:52:02,758 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:52:02,758 - INFO -    Card: Unknown
+2025-08-04 18:52:02,758 - INFO -    Last known price: $0.00
+2025-08-04 18:52:02,758 - INFO -    Data points used: 0
+2025-08-04 18:52:02,758 - INFO -    7-day prediction: $0.00
+2025-08-04 18:52:02,758 - INFO -    95% CI: $0.00 - $0.00
+2025-08-04 18:52:02,758 - INFO - 
+📊 Testing forecast for card: base1-10
+2025-08-04 18:52:02,772 - INFO - Found 68 price columns for card base1-10
+2025-08-04 18:52:02,779 - INFO - Raw data shape: (1, 69)
+2025-08-04 18:52:02,779 - INFO - Transposed data shape: (68, 1)
+2025-08-04 18:52:02,780 - INFO - Sample data:                           price
+cardMarketPrice-05-29-25  43.95
+cardMarketPrice-05-30-25  43.95
+cardMarketPrice-05-31-25  43.95
+cardMarketPrice-06-01-25  43.95
+cardMarketPrice-06-02-25  43.78
+2025-08-04 18:52:02,784 - INFO - Valid dates found: 66
+2025-08-04 18:52:02,785 - INFO - Final data shape: (66, 1)
+2025-08-04 18:52:02,785 - INFO - Price range: 38.84 - 44.34
+2025-08-04 18:52:02,787 - INFO - Loaded existing model for base1-10
+2025-08-04 18:52:02,787 - INFO - Model for base1-10: {}
+2025-08-04 18:52:02,787 - WARNING - No models trained for base1-10, returning empty result
+2025-08-04 18:52:02,787 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:52:02,787 - INFO -    Card: Unknown
+2025-08-04 18:52:02,787 - INFO -    Last known price: $0.00
+2025-08-04 18:52:02,787 - INFO -    Data points used: 0
+2025-08-04 18:52:02,787 - INFO -    7-day prediction: $0.00
+2025-08-04 18:52:02,787 - INFO -    95% CI: $0.00 - $0.00
+2025-08-04 18:52:02,787 - INFO - 
+📊 Testing forecast for card: base1-100
+2025-08-04 18:52:02,801 - INFO - Found 68 price columns for card base1-100
+2025-08-04 18:52:02,807 - INFO - Raw data shape: (1, 69)
+2025-08-04 18:52:02,808 - INFO - Transposed data shape: (68, 1)
+2025-08-04 18:52:02,809 - INFO - Sample data:                          price
+cardMarketPrice-05-29-25  0.37
+cardMarketPrice-05-30-25  0.37
+cardMarketPrice-05-31-25  0.37
+cardMarketPrice-06-01-25  0.37
+cardMarketPrice-06-02-25  0.37
+2025-08-04 18:52:02,812 - INFO - Valid dates found: 66
+2025-08-04 18:52:02,813 - INFO - Final data shape: (66, 1)
+2025-08-04 18:52:02,813 - INFO - Price range: 0.36 - 0.47
+2025-08-04 18:52:02,815 - INFO - Loaded existing model for base1-100
+2025-08-04 18:52:02,815 - INFO - Model for base1-100: {}
+2025-08-04 18:52:02,815 - WARNING - No models trained for base1-100, returning empty result
+2025-08-04 18:52:02,815 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:52:02,815 - INFO -    Card: Unknown
+2025-08-04 18:52:02,815 - INFO -    Last known price: $0.00
+2025-08-04 18:52:02,815 - INFO -    Data points used: 0
+2025-08-04 18:52:02,815 - INFO -    7-day prediction: $0.00
+2025-08-04 18:52:02,815 - INFO -    95% CI: $0.00 - $0.00
+2025-08-04 18:52:02,815 - INFO - 
+📋 Testing forecast summary for base1-1
+2025-08-04 18:52:02,830 - INFO - Found 68 price columns for card base1-1
+2025-08-04 18:52:02,837 - INFO - Raw data shape: (1, 69)
+2025-08-04 18:52:02,837 - INFO - Transposed data shape: (68, 1)
+2025-08-04 18:52:02,838 - INFO - Sample data:                           price
+cardMarketPrice-05-29-25  61.31
+cardMarketPrice-05-30-25  61.31
+cardMarketPrice-05-31-25  61.31
+cardMarketPrice-06-01-25  61.31
+cardMarketPrice-06-02-25  60.86
+2025-08-04 18:52:02,841 - INFO - Valid dates found: 66
+2025-08-04 18:52:02,842 - INFO - Final data shape: (66, 1)
+2025-08-04 18:52:02,842 - INFO - Price range: 51.24 - 61.31
+2025-08-04 18:52:02,844 - INFO - Loaded existing model for base1-1
+2025-08-04 18:52:02,844 - INFO - Model for base1-1: {}
+2025-08-04 18:52:02,844 - WARNING - No models trained for base1-1, returning empty result
+2025-08-04 18:52:02,844 - INFO -    Trend: stable
+2025-08-04 18:52:02,844 - INFO -    Volatility: 0.00
+2025-08-04 18:52:02,844 - INFO -    Quality: low
+2025-08-04 18:52:11,455 - INFO - 🧪 Testing Pokemon Price Forecasting System
+2025-08-04 18:52:11,456 - INFO - 
+📊 Testing forecast for card: base1-1
+2025-08-04 18:52:11,471 - INFO - Found 68 price columns for card base1-1
+2025-08-04 18:52:11,478 - INFO - Raw data shape: (1, 69)
+2025-08-04 18:52:11,478 - INFO - Transposed data shape: (68, 1)
+2025-08-04 18:52:11,481 - INFO - Sample data:                           price
+cardMarketPrice-05-29-25  61.31
+cardMarketPrice-05-30-25  61.31
+cardMarketPrice-05-31-25  61.31
+cardMarketPrice-06-01-25  61.31
+cardMarketPrice-06-02-25  60.86
+2025-08-04 18:52:11,485 - INFO - Valid dates found: 66
+2025-08-04 18:52:11,486 - INFO - Final data shape: (66, 1)
+2025-08-04 18:52:11,487 - INFO - Price range: 51.24 - 61.31
+2025-08-04 18:52:11,489 - INFO - Training new model for base1-1
+2025-08-04 18:52:11,534 - DEBUG - input tempfile: /var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpat6bs4cp/5odsmhea.json
+2025-08-04 18:52:11,535 - DEBUG - input tempfile: /var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpat6bs4cp/eeu6am0q.json
+2025-08-04 18:52:11,536 - DEBUG - idx 0
+2025-08-04 18:52:11,536 - DEBUG - running CmdStan, num_threads: None
+2025-08-04 18:52:11,536 - DEBUG - CmdStan args: ['/Users/krishnakorrapati/Desktop/pokemon_clean/venv/lib/python3.13/site-packages/prophet/stan_model/prophet_model.bin', 'random', 'seed=91938', 'data', 'file=/var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpat6bs4cp/5odsmhea.json', 'init=/var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpat6bs4cp/eeu6am0q.json', 'output', 'file=/var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpat6bs4cp/prophet_modeliwy6xu6_/prophet_model-20250804185211.csv', 'method=optimize', 'algorithm=newton', 'iter=10000']
+2025-08-04 18:52:11,536 - INFO - Chain [1] start processing
+2025-08-04 18:52:11,778 - INFO - Chain [1] done processing
+2025-08-04 18:52:11,780 - INFO - Trained model keys: ['prophet', 'ma', 'trend']
+2025-08-04 18:52:11,781 - INFO - Model for base1-1: {'prophet': <prophet.forecaster.Prophet object at 0x133ee7b60>, 'ma': {'type': 'moving_average', 'window': 7, 'last_prices': [51.57, 51.57, 51.57, 51.57, 51.24, 51.24, 51.24]}, 'trend': {'type': 'linear_trend', 'slope': -0.17445945099676458, 'intercept': 61.73568973315244, 'last_date': Timestamp('2025-08-04 00:00:00'), 'last_price': 51.24}}
+2025-08-04 18:52:11,804 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:52:11,804 - INFO -    Card: Alakazam
+2025-08-04 18:52:11,804 - INFO -    Last known price: $51.24
+2025-08-04 18:52:11,804 - INFO -    Data points used: 66
+2025-08-04 18:52:11,804 - INFO -    7-day prediction: $50.62
+2025-08-04 18:52:11,804 - INFO -    95% CI: $49.59 - $51.75
+2025-08-04 18:52:11,804 - INFO -    Expected change: -1.2%
+2025-08-04 18:52:11,804 - INFO - 
+📊 Testing forecast for card: base1-10
+2025-08-04 18:52:11,819 - INFO - Found 68 price columns for card base1-10
+2025-08-04 18:52:11,826 - INFO - Raw data shape: (1, 69)
+2025-08-04 18:52:11,826 - INFO - Transposed data shape: (68, 1)
+2025-08-04 18:52:11,828 - INFO - Sample data:                           price
+cardMarketPrice-05-29-25  43.95
+cardMarketPrice-05-30-25  43.95
+cardMarketPrice-05-31-25  43.95
+cardMarketPrice-06-01-25  43.95
+cardMarketPrice-06-02-25  43.78
+2025-08-04 18:52:11,831 - INFO - Valid dates found: 66
+2025-08-04 18:52:11,832 - INFO - Final data shape: (66, 1)
+2025-08-04 18:52:11,832 - INFO - Price range: 38.84 - 44.34
+2025-08-04 18:52:11,834 - INFO - Training new model for base1-10
+2025-08-04 18:52:11,841 - DEBUG - input tempfile: /var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpat6bs4cp/zyegqhth.json
+2025-08-04 18:52:11,842 - DEBUG - input tempfile: /var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpat6bs4cp/cv0dmmkq.json
+2025-08-04 18:52:11,843 - DEBUG - idx 0
+2025-08-04 18:52:11,843 - DEBUG - running CmdStan, num_threads: None
+2025-08-04 18:52:11,843 - DEBUG - CmdStan args: ['/Users/krishnakorrapati/Desktop/pokemon_clean/venv/lib/python3.13/site-packages/prophet/stan_model/prophet_model.bin', 'random', 'seed=26331', 'data', 'file=/var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpat6bs4cp/zyegqhth.json', 'init=/var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpat6bs4cp/cv0dmmkq.json', 'output', 'file=/var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpat6bs4cp/prophet_modelw27phqln/prophet_model-20250804185211.csv', 'method=optimize', 'algorithm=newton', 'iter=10000']
+2025-08-04 18:52:11,843 - INFO - Chain [1] start processing
+2025-08-04 18:52:12,045 - INFO - Chain [1] done processing
+2025-08-04 18:52:12,047 - INFO - Trained model keys: ['prophet', 'ma', 'trend']
+2025-08-04 18:52:12,048 - INFO - Model for base1-10: {'prophet': <prophet.forecaster.Prophet object at 0x1440aaad0>, 'ma': {'type': 'moving_average', 'window': 7, 'last_prices': [39.05, 39.22, 39.3, 39.61, 39.83, 39.83, 39.82]}, 'trend': {'type': 'linear_trend', 'slope': -0.06350986327105737, 'intercept': 43.78467661691545, 'last_date': Timestamp('2025-08-04 00:00:00'), 'last_price': 39.82}}
+2025-08-04 18:52:12,068 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:52:12,069 - INFO -    Card: Mewtwo
+2025-08-04 18:52:12,069 - INFO -    Last known price: $39.82
+2025-08-04 18:52:12,069 - INFO -    Data points used: 66
+2025-08-04 18:52:12,069 - INFO -    7-day prediction: $38.75
+2025-08-04 18:52:12,069 - INFO -    95% CI: $37.67 - $39.81
+2025-08-04 18:52:12,069 - INFO -    Expected change: -2.7%
+2025-08-04 18:52:12,069 - INFO - 
+📊 Testing forecast for card: base1-100
+2025-08-04 18:52:12,083 - INFO - Found 68 price columns for card base1-100
+2025-08-04 18:52:12,090 - INFO - Raw data shape: (1, 69)
+2025-08-04 18:52:12,090 - INFO - Transposed data shape: (68, 1)
+2025-08-04 18:52:12,092 - INFO - Sample data:                          price
+cardMarketPrice-05-29-25  0.37
+cardMarketPrice-05-30-25  0.37
+cardMarketPrice-05-31-25  0.37
+cardMarketPrice-06-01-25  0.37
+cardMarketPrice-06-02-25  0.37
+2025-08-04 18:52:12,095 - INFO - Valid dates found: 66
+2025-08-04 18:52:12,096 - INFO - Final data shape: (66, 1)
+2025-08-04 18:52:12,096 - INFO - Price range: 0.36 - 0.47
+2025-08-04 18:52:12,098 - INFO - Training new model for base1-100
+2025-08-04 18:52:12,105 - DEBUG - input tempfile: /var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpat6bs4cp/tnkoqctx.json
+2025-08-04 18:52:12,107 - DEBUG - input tempfile: /var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpat6bs4cp/p7hddm1_.json
+2025-08-04 18:52:12,107 - DEBUG - idx 0
+2025-08-04 18:52:12,107 - DEBUG - running CmdStan, num_threads: None
+2025-08-04 18:52:12,107 - DEBUG - CmdStan args: ['/Users/krishnakorrapati/Desktop/pokemon_clean/venv/lib/python3.13/site-packages/prophet/stan_model/prophet_model.bin', 'random', 'seed=34210', 'data', 'file=/var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpat6bs4cp/tnkoqctx.json', 'init=/var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpat6bs4cp/p7hddm1_.json', 'output', 'file=/var/folders/ss/27vq3hkx7sv2yb9h67l7pskm0000gn/T/tmpat6bs4cp/prophet_model4nyl0ncw/prophet_model-20250804185212.csv', 'method=optimize', 'algorithm=newton', 'iter=10000']
+2025-08-04 18:52:12,107 - INFO - Chain [1] start processing
+2025-08-04 18:52:12,299 - INFO - Chain [1] done processing
+2025-08-04 18:52:12,301 - INFO - Trained model keys: ['prophet', 'ma', 'trend']
+2025-08-04 18:52:12,302 - INFO - Model for base1-100: {'prophet': <prophet.forecaster.Prophet object at 0x1440aa5d0>, 'ma': {'type': 'moving_average', 'window': 7, 'last_prices': [0.4, 0.39, 0.39, 0.4, 0.41, 0.41, 0.4]}, 'trend': {'type': 'linear_trend', 'slope': 0.0006989468864468883, 'intercept': 0.38001442307692296, 'last_date': Timestamp('2025-08-04 00:00:00'), 'last_price': 0.4}}
+2025-08-04 18:52:12,322 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:52:12,322 - INFO -    Card: Lightning Energy
+2025-08-04 18:52:12,322 - INFO -    Last known price: $0.40
+2025-08-04 18:52:12,322 - INFO -    Data points used: 64
+2025-08-04 18:52:12,322 - INFO -    7-day prediction: $0.39
+2025-08-04 18:52:12,322 - INFO -    95% CI: $0.37 - $0.42
+2025-08-04 18:52:12,322 - INFO -    Expected change: -1.3%
+2025-08-04 18:52:12,323 - INFO - 
+📋 Testing forecast summary for base1-1
+2025-08-04 18:52:12,338 - INFO - Found 68 price columns for card base1-1
+2025-08-04 18:52:12,344 - INFO - Raw data shape: (1, 69)
+2025-08-04 18:52:12,345 - INFO - Transposed data shape: (68, 1)
+2025-08-04 18:52:12,346 - INFO - Sample data:                           price
+cardMarketPrice-05-29-25  61.31
+cardMarketPrice-05-30-25  61.31
+cardMarketPrice-05-31-25  61.31
+cardMarketPrice-06-01-25  61.31
+cardMarketPrice-06-02-25  60.86
+2025-08-04 18:52:12,349 - INFO - Valid dates found: 66
+2025-08-04 18:52:12,350 - INFO - Final data shape: (66, 1)
+2025-08-04 18:52:12,351 - INFO - Price range: 51.24 - 61.31
+2025-08-04 18:52:12,353 - INFO - Loaded existing model for base1-1
+2025-08-04 18:52:12,353 - INFO - Model for base1-1: {'prophet': <prophet.forecaster.Prophet object at 0x1440abc50>, 'ma': {'type': 'moving_average', 'window': 7, 'last_prices': [51.57, 51.57, 51.57, 51.57, 51.24, 51.24, 51.24]}, 'trend': {'type': 'linear_trend', 'slope': -0.17445945099676458, 'intercept': 61.73568973315244, 'last_date': Timestamp('2025-08-04 00:00:00'), 'last_price': 51.24}}
+2025-08-04 18:52:12,371 - INFO -    Trend: decreasing
+2025-08-04 18:52:12,371 - INFO -    Volatility: 0.12
+2025-08-04 18:52:12,371 - INFO -    Quality: high
+2025-08-04 18:52:58,440 - INFO - 🧪 Testing Pokemon Price Forecasting System
+2025-08-04 18:52:58,441 - INFO - 
+📊 Testing forecast for card: base1-1
+2025-08-04 18:52:58,683 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:52:58,683 - INFO -    Card: Alakazam
+2025-08-04 18:52:58,683 - INFO -    Last known price: $51.24
+2025-08-04 18:52:58,683 - INFO -    Data points used: 66
+2025-08-04 18:52:58,683 - INFO -    7-day prediction: $50.62
+2025-08-04 18:52:58,683 - INFO -    95% CI: $49.65 - $51.63
+2025-08-04 18:52:58,683 - INFO -    Expected change: -1.2%
+2025-08-04 18:52:58,683 - INFO - 
+📊 Testing forecast for card: base1-10
+2025-08-04 18:52:58,728 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:52:58,728 - INFO -    Card: Mewtwo
+2025-08-04 18:52:58,728 - INFO -    Last known price: $39.82
+2025-08-04 18:52:58,728 - INFO -    Data points used: 66
+2025-08-04 18:52:58,728 - INFO -    7-day prediction: $38.75
+2025-08-04 18:52:58,728 - INFO -    95% CI: $37.70 - $39.80
+2025-08-04 18:52:58,728 - INFO -    Expected change: -2.7%
+2025-08-04 18:52:58,728 - INFO - 
+📊 Testing forecast for card: base1-100
+2025-08-04 18:52:58,776 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:52:58,776 - INFO -    Card: Lightning Energy
+2025-08-04 18:52:58,777 - INFO -    Last known price: $0.40
+2025-08-04 18:52:58,777 - INFO -    Data points used: 64
+2025-08-04 18:52:58,777 - INFO -    7-day prediction: $0.39
+2025-08-04 18:52:58,777 - INFO -    95% CI: $0.37 - $0.42
+2025-08-04 18:52:58,777 - INFO -    Expected change: -1.3%
+2025-08-04 18:52:58,777 - INFO - 
+📋 Testing forecast summary for base1-1
+2025-08-04 18:52:58,832 - INFO -    Trend: decreasing
+2025-08-04 18:52:58,832 - INFO -    Volatility: 0.12
+2025-08-04 18:52:58,832 - INFO -    Quality: high
+2025-08-04 18:53:31,410 - INFO - 🧪 Testing Pokemon Price Forecasting System
+2025-08-04 18:53:31,411 - INFO - 
+📊 Testing forecast for card: base1-1
+2025-08-04 18:53:31,655 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:53:31,655 - INFO -    Card: Alakazam
+2025-08-04 18:53:31,655 - INFO -    Last known price: $51.24
+2025-08-04 18:53:31,655 - INFO -    Data points used: 66
+2025-08-04 18:53:31,655 - INFO -    7-day prediction: $50.62
+2025-08-04 18:53:31,655 - INFO -    95% CI: $49.55 - $51.62
+2025-08-04 18:53:31,655 - INFO -    Expected change: -1.2%
+2025-08-04 18:53:31,656 - INFO - 
+📊 Testing forecast for card: base1-10
+2025-08-04 18:53:31,702 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:53:31,702 - INFO -    Card: Mewtwo
+2025-08-04 18:53:31,702 - INFO -    Last known price: $39.82
+2025-08-04 18:53:31,702 - INFO -    Data points used: 66
+2025-08-04 18:53:31,702 - INFO -    7-day prediction: $38.75
+2025-08-04 18:53:31,702 - INFO -    95% CI: $37.68 - $39.80
+2025-08-04 18:53:31,702 - INFO -    Expected change: -2.7%
+2025-08-04 18:53:31,702 - INFO - 
+📊 Testing forecast for card: base1-100
+2025-08-04 18:53:31,750 - INFO - ✅ Forecast generated successfully!
+2025-08-04 18:53:31,750 - INFO -    Card: Lightning Energy
+2025-08-04 18:53:31,750 - INFO -    Last known price: $0.40
+2025-08-04 18:53:31,750 - INFO -    Data points used: 64
+2025-08-04 18:53:31,750 - INFO -    7-day prediction: $0.39
+2025-08-04 18:53:31,750 - INFO -    95% CI: $0.37 - $0.42
+2025-08-04 18:53:31,750 - INFO -    Expected change: -1.3%
+2025-08-04 18:53:31,750 - INFO - 
+📋 Testing forecast summary for base1-1
+2025-08-04 18:53:31,795 - INFO -    Trend: decreasing
+2025-08-04 18:53:31,795 - INFO -    Volatility: 0.12
+2025-08-04 18:53:31,795 - INFO -    Quality: high

@@ -1,0 +1,9 @@
+2025-08-04 19:04:59,815 - ERROR - Error loading data from database: Execution failed on sql '
+            SELECT c.*, 
+                   COALESCE(c.art_score_0_10, 0) as art_score,
+                   COALESCE(c.competitive_score, 0) as competitive_score,
+                   COALESCE(c.competitive_tier, 'Unknown') as competitive_tier
+            FROM cards c
+            WHERE c.supertype IN ('Pokémon', 'Trainer', 'Energy')
+        ': no such column: c.competitive_score
+2025-08-04 19:05:56,684 - INFO - Loaded 18178 cards from database

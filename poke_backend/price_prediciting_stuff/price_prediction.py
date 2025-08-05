@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import re
 import logging
+import sqlite3
 
 # Set up logging
 logging.basicConfig(
@@ -18,6 +19,55 @@ logging.basicConfig(
         logging.StreamHandler()
     ]
 )
+
+def load_data_from_sql():
+    """
+    Load data from SQLite database instead of CSV
+    """
+    try:
+        conn = sqlite3.connect("../pokemon_cards.db")
+        
+        # Get the most recent price column from price_history table
+        cursor = conn.cursor()
+        cursor.execute("PRAGMA table_info(price_history)")
+        columns = [col[1] for col in cursor.fetchall()]
+        logging.info(f"Found {len(columns)} columns in price_history table")
+        
+        price_columns = [col for col in columns if col.startswith('cardMarketPrice-')]
+        logging.info(f"Found {len(price_columns)} price columns: {price_columns[:5]}...")
+        
+        if not price_columns:
+            logging.error("No price columns found in price_history table")
+            return None, None
+        
+        # Use the most recent price column (filter out test/simulation columns)
+        valid_price_columns = [col for col in price_columns if not any(suffix in col for suffix in ['-test', '-simulation'])]
+        latest_price_col = sorted(valid_price_columns)[-1]
+        logging.info(f"Using price column: {latest_price_col}")
+        
+        # Load data with all features including art scores and competitive scores
+        query = f"""
+            SELECT c.*, 
+                   COALESCE(c.art_score_0_10, 0) as art_score,
+                   COALESCE(0, 0) as competitive_score,
+                   COALESCE('Unknown', 'Unknown') as competitive_tier,
+                   COALESCE(ph."{latest_price_col}", 0) as current_price
+            FROM cards c
+            LEFT JOIN price_history ph ON c.id = ph.id
+            WHERE c.supertype IN ('Pokémon', 'Trainer', 'Energy')
+            AND ph."{latest_price_col}" IS NOT NULL 
+            AND ph."{latest_price_col}" > 0
+        """
+        
+        df = pd.read_sql_query(query, conn)
+        conn.close()
+        
+        logging.info(f"Loaded {len(df)} cards with price data from database")
+        return df, latest_price_col
+        
+    except Exception as e:
+        logging.error(f"Error loading data from database: {e}")
+        return None, None
 
 def extract_set_id(set_info):
     """
@@ -64,7 +114,7 @@ def extract_standard_legality(legalities_str):
 
 def preprocess_features(df):
     """
-    Preprocess the features for the XGBoost model.
+    Preprocess the features for the XGBoost model, now including art scores and competitive scores.
     """
     logging.info("Starting feature preprocessing...")
     
@@ -91,19 +141,29 @@ def preprocess_features(df):
         lambda x: ', '.join(x) if isinstance(x, list) and len(x) > 0 else 'None'
     )
     
-    # 5. Select features for the model
+    # 5. Process competitive tier (convert to numeric)
+    logging.info("Processing competitive tiers...")
+    tier_mapping = {
+        'S-Tier': 5, 'A-Tier': 4, 'B-Tier': 3, 'C-Tier': 2, 'D-Tier': 1, 'Unknown': 0
+    }
+    df_processed['competitive_tier_numeric'] = df_processed['competitive_tier'].map(tier_mapping)
+    
+    # 6. Select features for the model (now including art and competitive scores)
     feature_columns = [
         'supertype', 'subtypes_str', 'types_str', 'set_id', 
-        'artist', 'rarity', 'standard_legal', 'popularity_votes','avg_votes'
+        'artist', 'rarity', 'standard_legal', 'popularity_votes', 'avg_votes',
+        'art_score', 'competitive_score', 'competitive_tier_numeric'  # New features
     ]
     
-    # 6. Handle missing values
-    logging.info("Handling missing values...")
+    # 7. Handle missing values
     for col in feature_columns:
-        if df_processed[col].isnull().sum() > 0:
-            df_processed[col] = df_processed[col].fillna('Unknown')
-            logging.info(f"Filled {df_processed[col].isnull().sum()} missing values in {col}")
+        if col in df_processed.columns:
+            if df_processed[col].dtype == 'object':
+                df_processed[col] = df_processed[col].fillna('Unknown')
+            else:
+                df_processed[col] = df_processed[col].fillna(0)
     
+    logging.info(f"Feature preprocessing complete. Using {len(feature_columns)} features.")
     return df_processed, feature_columns
 
 def encode_features(df, feature_columns):
@@ -386,15 +446,14 @@ def main():
     logging.info("Starting price prediction pipeline...")
     
     # Load the dataset
-    try:
-        df = pd.read_csv("predict.csv")
-        logging.info(f"Loade {len(df)} cards from pokemon_cards.csv")
-    except FileNotFoundError:
-        logging.error("pokemon_cards.csv not found. Please ensure the file exists.")
+    df, latest_price_col = load_data_from_sql()
+    
+    if df is None:
+        logging.error("Failed to load data from database. Exiting.")
         return
     
     # Prepare data
-    X, y, encoders, feature_columns = prepare_data(df)
+    X, y, encoders, feature_columns = prepare_data(df, target_column='current_price')
     
     if X is None or y is None:
         logging.error("Failed to prepare data. Exiting.")
