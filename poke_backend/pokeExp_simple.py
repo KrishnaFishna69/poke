@@ -3,7 +3,7 @@
 Simple Pokemon Card Price Update Script
 Updates the SQLite database with today's prices
 """
-print("Hello World")
+print("Hello ")
 
 from pokemontcgsdk import Card, RestClient
 import pandas as pd
